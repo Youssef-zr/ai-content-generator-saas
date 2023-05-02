@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\QuestionController;
+use App\Http\Controllers\Dashboard\ToneController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +19,6 @@ Route::group(["middleware" => "web"], function () {
     });
 
     Route::resource('categories', CategoryController::class);
+    Route::resource('questions', QuestionController::class);
+    Route::resource('tones', ToneController::class);
 });

@@ -1,29 +1,6 @@
 $(() => {
-    window._token = $('meta[name="csrf-token"]').attr("content");
-
-    $(".buttons-select-all", function () {
-        $rows = $(".row-item");
-        for (const $index in $rows) {
-            if (Object.hasOwnProperty.call($rows, $index)) {
-                const element = $rows[$index];
-                if (element) {
-                    $(element).prop("checked", true);
-                }
-            }
-        }
-    });
-
-    $(".buttons-select-none", function () {
-        $rows = $(".row-item");
-        for (const $index in $rows) {
-            if (Object.hasOwnProperty.call($rows, $index)) {
-                const element = $rows[$index];
-                $(element).prop("checked", false);
-            }
-        }
-    });
-
     $('[data-toggle="tooltip"]').tooltip();
+
     let copyButtonTrans = "Copy";
     let csvButtonTrans = "CSV";
     let excelButtonTrans = "Excel";
@@ -38,6 +15,10 @@ $(() => {
         language: {
             url: languages["en"],
         },
+        lengthMenu: [
+            [10, 50, 100, -1],
+            [10, 50, 100, "All"],
+        ],
         columnDefs: [
             {
                 orderable: false,
@@ -56,7 +37,7 @@ $(() => {
         },
         order: [],
         scrollX: true,
-        pageLength: 100,
+        pageLength: 10,
         dom: 'lBfrtip<"actions">',
         buttons: [
             // {
@@ -135,17 +116,14 @@ $(() => {
 
     // other features
     // open modal remove
-    var _url = "";
+    let formDelete = $(".form-remove-item");
     $(".open-modal-remove").on("click", function () {
-        _url = $(this).data("url");
+        let $url = $(this).data("url");
+        formDelete.attr("action", $url);
     });
-    
+
     // confim delete
     $(".confirm-delete").click(function () {
-        let form = $(this).data("form");
-        let $form = $("." + form);
-
-        $form.attr("url", _url);
-        $form.submit();
+        formDelete.submit();
     });
 });

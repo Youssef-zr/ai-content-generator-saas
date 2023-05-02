@@ -1,20 +1,23 @@
-<!-- title field -->
-<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
+<!-- Tone field -->
+<div class="form-group {{ $errors->has('tone') ? 'has-error' : '' }}">
     <div class="option">
-        {!! Form::label('title', 'title', ['class' => 'form-label']) !!}
+        {!! Form::label('tone', 'Tone', ['class' => 'form-label']) !!}
         <span class="star text-danger">*</span>
     </div>
-    {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => 'Enter a title here']) !!}
-    @if ($errors->has('title'))
+    {!! Form::text('tone', old('tone'), [
+        'class' => 'form-control',
+        'placeholder' => 'Enter a tone here',
+    ]) !!}
+    @if ($errors->has('tone'))
         <span class="help-block">
-            <strong>{{ $errors->first('title') }}</strong>
+            <strong>{{ $errors->first('tone') }}</strong>
         </span>
     @endif
 </div>
 
 <!-- submit button -->
 <div class="form-group">
-    @if (isset($category))
+    @if (isset($tone))
         <button type="submit" class="btn btn-warning">
             <i class="fa fa-pencil"></i>
             Update
@@ -22,7 +25,7 @@
     @else
         <button type="submit" class="btn btn-primary">
             <i class="fa fa-plus-circle"></i>
-          Create
+            Create
         </button>
     @endif
 </div>

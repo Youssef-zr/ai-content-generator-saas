@@ -6,6 +6,9 @@ textarea {
 .datatable {
     width: 100% !important;
 }
+table {
+    text-align: center;
+}
 
 table.dataTable tbody td.select-checkbox::before,
 table.dataTable tbody td.select-checkbox::after,
@@ -78,7 +81,8 @@ table.dataTable thead .sorting_desc {
     padding-left: 0px;
     padding-right: 0px;
 }
-.form-group {
+.form-group,
+.form-group .form-control::placeholder {
     text-transform: capitalize;
 }
 .form-group .required::after {
@@ -157,6 +161,11 @@ div.dt-button-collection {
 }
 .modal-header {
     text-transform: capitalize;
+}
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 .select2-container--default
     .select2-selection--multiple

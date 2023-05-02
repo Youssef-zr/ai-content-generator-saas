@@ -20,3 +20,25 @@ if (!function_exists('redirect_with_flash')) {
         return redirect($url);
     }
 }
+
+// Question Type
+if (!function_exists('question_type')) {
+    function question_type()
+    {
+        return [
+            'single_line' => "Single Line",
+            'multi_line' => "Multi Line"
+        ];
+    }
+}
+
+// Question Is Required
+if (!function_exists('question_is_required')) {
+    function question_is_required()
+    {
+        return [
+            'required' => "Required",
+            'optional' => "Optional"
+        ];
+    }
+}

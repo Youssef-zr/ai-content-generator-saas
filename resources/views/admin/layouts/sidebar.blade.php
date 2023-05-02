@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('questions.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-question-circle-o"></i>
                         <p>
                             Questions
@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('tones.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-music"></i>
                         <p>
                             Tones
