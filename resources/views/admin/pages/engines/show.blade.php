@@ -6,13 +6,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-0"> <i class="fa fa-question-circle-o"></i> Questions</h1>
+                    <h1 class="m-0"> <i class="fas fa-pencil-ruler"></i> Engines</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('questions.index') }}"><i class="fa fa-question-circle-o"></i>
-                                Questions
+                            <a href="{{ route('engines.index') }}"><i class="fas fa-pencil-ruler"></i>
+                                Engines
                             </a>
                         </li>
                         <li class="breadcrumb-item active"><i class="fa fa-eye"></i> Show</li>
@@ -27,39 +27,27 @@
 @section('content')
     <div class="card card-primary">
         <div class="card-header ">
-            <h3 class="card-title"><i class="fa fa-question-circle-o mr-1"></i> Question Information</h3>
+            <h3 class="card-title"><i class="fas fa-pencil-ruler mr-1"></i> Engine Information</h3>
         </div>
-        <div class="card-body">
+        <div class="card-body text-capitalize">
             <table class="table table-striped table-bordered text-left">
                 <tbody>
                     <tr>
                         <td><strong>ID</strong></td>
                         <td>
-                            <p>{{ $question->id }}</p>
+                            <p>{{ $engine->id }}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td><strong>Question</strong></td>
+                        <td><strong>title</strong></td>
                         <td>
-                            <p>{{ $question->question }}</p>
+                            <p>{{ $engine->title }}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td><strong>Type</strong></td>
+                        <td><strong>value</strong></td>
                         <td>
-                            <p>{{ question_type()[$question->type] }}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Required</strong></td>
-                        <td>
-                            <p>{{ question_is_required()[$question->is_required] }}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Minumum Answer length</strong></td>
-                        <td>
-                            <p>{{ $question->minimum_answer_length }}</p>
+                            <p>{{ $engine->value }}</p>
                         </td>
                     </tr>
                 </tbody>

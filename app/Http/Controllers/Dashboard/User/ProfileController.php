@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserPasswordRequest;
 use App\Http\Requests\User\UserProfileRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -29,7 +30,10 @@ class ProfileController extends Controller
     public function update_password(UserPasswordRequest $request)
     {
         $user = Auth::user();
-        $user->fill($request->all())->save();
+        $password = Hash::make($request->password);
+        $user->fill([
+            "password" => $password
+        ])->save();
 
         return redirect_with_flash("msgSuccess", "Your Password Was Updated Successfully", 'profile');
     }

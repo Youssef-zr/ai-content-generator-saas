@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             ToneTableSeeder::class,
             EngineTableSeeder::class,
             LanguageTableSeeder::class,
-            PromptTableSeeder::class
+            PromptTableSeeder::class,
+            PlanTableSeeder::class,
         ]);
     }
 }

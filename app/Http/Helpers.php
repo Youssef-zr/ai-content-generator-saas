@@ -53,3 +53,14 @@ if (!function_exists('prompt_type_list')) {
         ];
     }
 }
+
+// plan type list
+if (!function_exists('plans_type')) {
+    function plans_type()
+    {
+        return [
+            'free' => "Free",
+            'paid' => "Paid"
+        ];
+    }
+}

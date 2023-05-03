@@ -39,7 +39,7 @@ class EngineController extends Controller
      */
     public function show(Engine $engine)
     {
-        //
+        return view("admin.pages.engines.show",compact('engine'));
     }
 
     /**

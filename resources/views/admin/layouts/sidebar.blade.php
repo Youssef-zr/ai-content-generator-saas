@@ -83,6 +83,31 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-toggle="tooltip" title="Subscription Managment">
+                        <i class="nav-icon fa fa-paper-plane-o"></i>
+                        <p>
+                            Subscriptions
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('plans.index') }}" class="nav-link">
+                                <i class="fas fa-cubes nav-icon"></i>
+                                <p>Plans</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                <i class="fas fa-archive nav-icon"></i>
+                                <p>subscriptions</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>
