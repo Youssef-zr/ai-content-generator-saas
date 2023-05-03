@@ -60,7 +60,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('engines.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-pencil-ruler"></i>
                         <p>
                             Engines
@@ -68,7 +68,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('languages.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-question-circle-o"></i>
                         <p>
                             Languages
@@ -76,7 +76,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('prompts.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-keyboard-o"></i>
                         <p>
                             Prompts

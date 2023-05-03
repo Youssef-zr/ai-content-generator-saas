@@ -42,3 +42,14 @@ if (!function_exists('question_is_required')) {
         ];
     }
 }
+
+// Prompt type
+if (!function_exists('prompt_type_list')) {
+    function prompt_type_list()
+    {
+        return [
+            'text' => "Text",
+            'image' => "Image"
+        ];
+    }
+}

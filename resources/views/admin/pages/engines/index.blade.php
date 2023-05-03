@@ -6,13 +6,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-0"> <i class="fa fa-tags"></i> Categories</h1>
+                    <h1 class="m-0"> <i class="fas fa-pencil-ruler"></i> Engines</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('categories.index') }}"><i class="fa fa-tags"></i>
-                                Categories
+                            <a href="{{ route('engines.index') }}"><i class="fas fa-pencil-ruler"></i>
+                                Engines
                             </a>
                         </li>
                         <li class="breadcrumb-item active"><i class="fa fa-list"></i> List</li>
@@ -26,15 +26,15 @@
 <!-- content -->
 @section('content')
     <div class="new-row mb-2">
-        <a href="{{ route('categories.create') }}" class="btn btn-primary">
+        <a href="{{ route('engines.create') }}" class="btn btn-primary">
             <i class="fa fa-plus"></i>
-            New Category
+            New Engine
         </a>
     </div>
 
     <div class="card card-primary">
         <div class="card-header ">
-            <h3 class="card-title"><i class="fa fa-tags mr-1"></i> Categories List</h3>
+            <h3 class="card-title"><i class="fas fa-pencil-ruler mr-1"></i> Engines List</h3>
         </div>
         <div class="card-body">
             <table class="table table-striped table-hovered" style="width:100%">
@@ -42,22 +42,28 @@
                     <tr>
                         <th style="width:70px">#</th>
                         <th>Title</th>
-                        <th style="width:180px">Actions</th>
+                        <th>Value</th>
+                        <th style="width:120px">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($engines as $engine)
                         <tr>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->title }}</td>
+                            <td>{{ $engine->id }}</td>
+                            <td>{{ $engine->title }}</td>
+                            <td>{{ $engine->value }}</td>
                             <td>
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm"
+                                <a href="{{ route('engines.show', $engine->id) }}" class="btn btn-primary btn-sm"
+                                    title="show information" data-toggle="tooltip">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="{{ route('engines.edit', $engine->id) }}" class="btn btn-warning btn-sm"
                                     title="edit" data-toggle="tooltip">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('categories.destroy', $category->id) }}">
-                                    <i class="fa fa-trash" title="delete" data-toggle="tooltip"></i>
+                                    data-target="#removeItem" data-url="{{ route('engines.destroy', $engine->id) }}">
+                                    <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
                                 </button>
                             </td>
                         </tr>
@@ -67,6 +73,6 @@
         </div>
     </div>
 
-    <!-- Modal Remove Category -->
+    <!-- Modal Remove Engine -->
     @include('admin.modals.remove-item')
 @endsection

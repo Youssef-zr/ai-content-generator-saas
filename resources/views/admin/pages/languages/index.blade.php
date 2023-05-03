@@ -6,13 +6,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-0"> <i class="fa fa-tags"></i> Categories</h1>
+                    <h1 class="m-0"> <i class="fa fa-globe"></i> Languages</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('categories.index') }}"><i class="fa fa-tags"></i>
-                                Categories
+                            <a href="{{ route('languages.index') }}"><i class="fa fa-globe"></i>
+                                Languages
                             </a>
                         </li>
                         <li class="breadcrumb-item active"><i class="fa fa-list"></i> List</li>
@@ -26,15 +26,15 @@
 <!-- content -->
 @section('content')
     <div class="new-row mb-2">
-        <a href="{{ route('categories.create') }}" class="btn btn-primary">
+        <a href="{{ route('languages.create') }}" class="btn btn-primary">
             <i class="fa fa-plus"></i>
-            New Category
+            New Language
         </a>
     </div>
 
     <div class="card card-primary">
         <div class="card-header ">
-            <h3 class="card-title"><i class="fa fa-tags mr-1"></i> Categories List</h3>
+            <h3 class="card-title"><i class="fa fa-globe mr-1"></i> languages List</h3>
         </div>
         <div class="card-body">
             <table class="table table-striped table-hovered" style="width:100%">
@@ -46,17 +46,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($languages as $language)
                         <tr>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->title }}</td>
+                            <td>{{ $language->id }}</td>
+                            <td>{{ $language->language }}</td>
                             <td>
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm"
+                                <a href="{{ route('languages.edit', $language->id) }}" class="btn btn-warning btn-sm"
                                     title="edit" data-toggle="tooltip">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('categories.destroy', $category->id) }}">
+                                    data-target="#removeItem" data-url="{{ route('languages.destroy', $language->id) }}">
                                     <i class="fa fa-trash" title="delete" data-toggle="tooltip"></i>
                                 </button>
                             </td>
@@ -67,6 +67,6 @@
         </div>
     </div>
 
-    <!-- Modal Remove Category -->
+    <!-- Modal Remove language -->
     @include('admin.modals.remove-item')
 @endsection

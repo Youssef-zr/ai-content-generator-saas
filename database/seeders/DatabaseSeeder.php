@@ -20,9 +20,13 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            UserTableSeeder::class,
             CategoryTableSeeder::class,
             QuestionTableSeeder::class,
-            ToneTableSeeder::class
+            ToneTableSeeder::class,
+            EngineTableSeeder::class,
+            LanguageTableSeeder::class,
+            PromptTableSeeder::class
         ]);
     }
 }
