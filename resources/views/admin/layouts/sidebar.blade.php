@@ -24,8 +24,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
+
+                <!-- dashboard -->
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">
                         <i class="nav-icon fa fa-dashboard"></i>
@@ -35,48 +35,60 @@
                         </p>
                     </a>
                 </li>
+
+                <!-- Categories -->
                 <li class="nav-item">
-                    <a href="{{ route('categories.index') }}" class="nav-link">
+                    <a href="{{ route('categories.index') }}" class="nav-link {{ activeSideLink('categories') }}">
                         <i class="nav-icon fa fa-tags"></i>
                         <p>
                             Categories
                         </p>
                     </a>
                 </li>
+
+                <!-- Questions -->
                 <li class="nav-item">
-                    <a href="{{ route('questions.index') }}" class="nav-link">
+                    <a href="{{ route('questions.index') }}" class="nav-link {{ activeSideLink('questions') }}">
                         <i class="nav-icon fa fa-question-circle-o"></i>
                         <p>
                             Questions
                         </p>
                     </a>
                 </li>
+
+                <!-- Tones -->
                 <li class="nav-item">
-                    <a href="{{ route('tones.index') }}" class="nav-link">
+                    <a href="{{ route('tones.index') }}" class="nav-link {{ activeSideLink('tones') }}">
                         <i class="nav-icon fas fa-music"></i>
                         <p>
                             Tones
                         </p>
                     </a>
                 </li>
+
+                <!-- Engines -->
                 <li class="nav-item">
-                    <a href="{{ route('engines.index') }}" class="nav-link">
+                    <a href="{{ route('engines.index') }}" class="nav-link {{ activeSideLink('engines') }}">
                         <i class="nav-icon fas fa-pencil-ruler"></i>
                         <p>
                             Engines
                         </p>
                     </a>
                 </li>
+
+                <!-- languages -->
                 <li class="nav-item">
-                    <a href="{{ route('languages.index') }}" class="nav-link">
+                    <a href="{{ route('languages.index') }}" class="nav-link {{ activeSideLink('languages') }}">
                         <i class="nav-icon fa fa-question-circle-o"></i>
                         <p>
                             Languages
                         </p>
                     </a>
                 </li>
+
+                <!-- prompts -->
                 <li class="nav-item">
-                    <a href="{{ route('prompts.index') }}" class="nav-link">
+                    <a href="{{ route('prompts.index') }}" class="nav-link {{ activeSideLink('prompts') }}">
                         <i class="nav-icon fa fa-keyboard-o"></i>
                         <p>
                             Prompts
@@ -84,8 +96,10 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-toggle="tooltip" title="Subscription Managment">
+                <!-- subscriptions managments -->
+                <li class="nav-item {{ active_menu('subscriptions')[0] }}">
+                    <a href="#" class="nav-link {{ active_menu('subscriptions')[1] }}" data-toggle="tooltip"
+                        title="Subscription Managment">
                         <i class="nav-icon fa fa-paper-plane-o"></i>
                         <p>
                             Subscriptions
@@ -94,7 +108,8 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('plans.index') }}" class="nav-link">
+                            <a href="{{ route('plans.index') }}"
+                                class="nav-link {{ setActive('subscriptions/plans', 'active') }}">
                                 <i class="fas fa-cubes nav-icon"></i>
                                 <p>Plans</p>
                             </a>
@@ -102,12 +117,47 @@
                         <li class="nav-item">
                             <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
                                 <i class="fas fa-archive nav-icon"></i>
-                                <p>subscriptions</p>
+                                <p>Subscriptions</p>
                             </a>
                         </li>
                     </ul>
                 </li>
 
+                <!-- settings -->
+                <li class="nav-item {{ active_menu('settings')[0] }}">
+                    <a href="#" class="nav-link {{ active_menu('settings')[1] }}" data-toggle="tooltip">
+                        <i class="nav-icon fa fa-cogs"></i>
+                        <p>
+                            Settings
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('settings.brand_show',1) }}"
+                                class="nav-link {{ setActive('settings/brand/1/edit', 'active') }}">
+                                <i class="fas fa-palette nav-icon"></i>
+                                <p>Brand</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('settings.third_party_show',1) }}"
+                                class="nav-link {{ setActive('settings/third-parties/1/edit', 'active') }}">
+                                <i class="fas fa-cog nav-icon"></i>
+                                <p>Third Party</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('settings.content_show',1) }}"
+                                class="nav-link {{ setActive('settings/content/1/edit', 'active') }}">
+                                <i class="fa fa-file nav-icon"></i>
+                                <p>Content</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- user managments -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>

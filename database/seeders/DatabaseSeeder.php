@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             LanguageTableSeeder::class,
             PromptTableSeeder::class,
             PlanTableSeeder::class,
+            SettingsTableSeeder::class,
         ]);
     }
 }

@@ -64,3 +64,54 @@ if (!function_exists('plans_type')) {
         ];
     }
 }
+
+// paypal env list list
+if (!function_exists('paypal_env_list')) {
+    function paypal_env_list()
+    {
+        return [
+            'sandbox' => "Sandox",
+            'production' => "Production"
+        ];
+    }
+}
+
+// ----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
+
+// active sidebar link
+if (!function_exists('activeSideLink')) {
+    function activeSideLink($path)
+    {
+        return request()->segment(2) == $path ? "active" : "";
+    }
+}
+
+if (!function_exists('setActive')) {
+    function setActive($path, $active = 'text-primary')
+    {
+        return request()->server("REQUEST_URI") == '/dashboard/' . $path ? $active : "";
+    }
+}
+
+if (!function_exists("active_menu")) {
+    function active_menu($link)
+    {
+        if (preg_match("/" . $link . "/i", request()->segment(2))) {
+            return ["menu-open", "active"];
+        } else {
+            return ["", ""];
+        }
+    }
+}
+//this function for active dashboard link in the navigation bar its a link not has a item
+if (!function_exists("active_dashboard_item")) {
+    function active_dashboard_item($link)
+    {
+        if (preg_match('/' . $link . '/i', request()->segment(2)) && request()->segment(3) == "") {
+            return ["active"];
+        } else {
+            return [""];
+        }
+    }
+}

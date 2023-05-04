@@ -45,8 +45,8 @@
                         <th>Price (Monthly)</th>
                         <th>Price (Yearly)</th>
                         <th>Type</th>
-                        <th>word limit</th>
-                        <th>image limit</th>
+                        <th>Word Limit</th>
+                        <th>Image Limit</th>
                         <th style="width:120px">Actions</th>
                     </tr>
                 </thead>
