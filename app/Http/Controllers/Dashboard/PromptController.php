@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PromptRequest;
-use App\Models\Category;
-use App\Models\Engine;
-use App\Models\Prompt;
-use App\Models\Question;
-use App\Models\Tone;
+use App\Models\{
+    Category,
+    Engine,
+    Prompt,
+    Question,
+    Tone,
+};
 
 class PromptController extends Controller
 {

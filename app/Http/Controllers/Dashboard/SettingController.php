@@ -4,30 +4,42 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Settings\LanguageRequest;
-use App\Http\Requests\Settings\BrandRequest;
-use App\Http\Requests\Settings\OpenAiRequest;
-use App\Http\Requests\Settings\PaypalRequest;
-use App\Models\Engine;
-use App\Models\Language;
-use App\Models\Setting;
 use App\Traits\UploadFiles;
+use App\Models\{
+    Engine,
+    Language,
+    Setting,
+};
+use App\Http\Requests\Settings\{
+    LanguageRequest,
+    BrandRequest,
+    OpenAiRequest,
+    PaypalRequest,
+};
 
 class SettingController extends Controller
 {
     use UploadFiles;
 
-    // show brand information
-    public function brand_show($id)
+    protected $settingModel;
+
+    public function __construct()
     {
-        $setting = Setting::findOrFail($id);
+        $setting = Setting::findOrFail(1);
+        $this->settingModel = $setting;
+    }
+
+    // show brand information
+    public function brand_show()
+    {
+        $setting = $this->settingModel;
         return view("admin.pages.settings.brand", compact('setting'));
     }
 
     // update brand information
-    public function brand_update(BrandRequest $request, $id)
+    public function brand_update(BrandRequest $request)
     {
-        $setting = Setting::findOrFail($id);
+        $setting = $this->settingModel;
 
         $data = $request->except(['logo', "favicon"]);
         $setting->fill($data)->save();
@@ -38,45 +50,45 @@ class SettingController extends Controller
     }
 
     // show third party information
-    public function third_party_show($id)
+    public function third_party_show()
     {
-        $setting = Setting::findOrFail($id);
+        $setting = $this->settingModel;
         $engines = Engine::pluck('value', "id")->toArray();
 
         return view("admin.pages.settings.third-party", compact('setting', "engines"));
     }
 
     // update third party information
-    public function update_open_ai_key(OpenAiRequest $request, $id)
+    public function update_open_ai_key(OpenAiRequest $request,)
     {
-        $setting = Setting::findOrFail($id);
-        $setting->fill($request->all())->save();
-
-        return back()->with('msgSuccess', 'open ai settings updated successfully');
-    }
-
-    // update paypal settings information
-    public function update_paypal_settings(PaypalRequest $request, $id)
-    {
-        $setting = Setting::findOrFail($id);
+        $setting = $this->settingModel;
         $setting->fill($request->all())->save();
 
         return back()->with('msgSuccess', 'Open ai settings updated successfully');
     }
 
-    // show content information
-    public function content_show($id)
+    // update paypal settings information
+    public function update_paypal_settings(PaypalRequest $request,)
     {
-        $setting = Setting::findOrFail($id);
+        $setting = $this->settingModel;
+        $setting->fill($request->all())->save();
+
+        return back()->with('msgSuccess', 'Paypal settings updated successfully');
+    }
+
+    // show content information
+    public function content_show()
+    {
+        $setting = $this->settingModel;
         $languages = Language::pluck('language', "id")->toArray();
 
         return view("admin.pages.settings.content", compact('setting', "languages"));
     }
 
     // update content default language
-    public function content_update(LanguageRequest $request, $id)
+    public function content_update(LanguageRequest $request,)
     {
-        $setting = Setting::findOrFail($id);
+        $setting = $this->settingModel;
         $setting->fill($request->all())->save();
 
         return back()->with('msgSuccess', 'Content language updated successfully');

@@ -30,7 +30,7 @@
             <h3 class="card-title"><i class="fas fa-globe mr-1"></i> Update Content </h3>
         </div>
         <div class="card-body">
-            {!! Form::model($setting, ['route' => ['settings.content_update', 1]]) !!}
+            {!! Form::model($setting, ['route' => ['settings.content_update']]) !!}
             @method('put')
             <!-- site title field -->
             <div class="form-group {{ $errors->has('language_id') ? 'has-error' : '' }}">

@@ -1,0 +1,76 @@
+@extends('admin.layouts.master')
+
+<!-- breadcrumb -->
+@section('breadcrumb')
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1 class="m-0"> <i class="fas fa-users"></i> Partners</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="{{ route('partners.index') }}"><i class="fas fa-users"></i>
+                                Partners
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active"><i class="fa fa-list"></i> List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+<!-- content -->
+@section('content')
+    <div class="new-row mb-2">
+        <a href="{{ route('partners.create') }}" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            New Partner
+        </a>
+    </div>
+
+    <div class="card card-primary">
+        <div class="card-header ">
+            <h3 class="card-title"><i class="fas fa-users mr-1"></i> Partners List</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hovered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th style="width:70px">#</th>
+                        <th>Title</th>
+                        <th>Logo</th>
+                        <th style="width:120px">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($partners as $partner)
+                        <tr>
+                            <td>{{ $partner->id }}</td>
+                            <td>{{ $partner->title }}</td>
+                            <td>
+                                <img src="{{ $partner->partner_logo }}" alt="{{ $partner->title }}" class="img-thumbnail" style="width:60px;height:60px">
+                            </td>
+                            <td>
+                                <a href="{{ route('partners.edit', $partner->id) }}" class="btn btn-warning btn-sm"
+                                    title="edit" data-toggle="tooltip">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
+                                    data-target="#removeItem" data-url="{{ route('partners.destroy', $partner->id) }}">
+                                    <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal Remove Partner -->
+    @include('admin.modals.remove-item')
+@endsection

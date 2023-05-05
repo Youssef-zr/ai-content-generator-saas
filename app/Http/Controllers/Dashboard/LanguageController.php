@@ -35,14 +35,6 @@ class LanguageController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Language $language)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Language $language)

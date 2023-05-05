@@ -6,9 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\QuestionRequest;
 use App\Models\Question;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\MockObject\Stub\ReturnReference;
-
-use function PHPUnit\Framework\returnSelf;
 
 class QuestionController extends Controller
 {

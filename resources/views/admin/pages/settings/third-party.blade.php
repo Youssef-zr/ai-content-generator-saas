@@ -31,7 +31,7 @@
             <h3 class="card-title"><i class="fas fa-cog mr-1"></i> Open Ai Settings </h3>
         </div>
         <div class="card-body">
-            {!! Form::model($setting, ['route' => ['settings.update_open_ai_key', 1]]) !!}
+            {!! Form::model($setting, ['route' => ['settings.update_open_ai_key']]) !!}
             @method('put')
 
             <!-- OpenAI Api Key field -->

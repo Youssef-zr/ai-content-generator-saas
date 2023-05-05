@@ -27,10 +27,12 @@ trait UploadFiles
         $height = $imgProps['height'] ?? null;
         $quality = $imgProps['quality'] ?? 100;
 
-        if ($width != null) {
-            $img->resize($width, $height, function ($constraint) {
+        if ($width != null and $height == null) {
+            $img->resize($width, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
+        } else {
+            $img->resize($width, $height);
         }
 
         $path = $imgProps['storagePath'] . '/' . $file_name;

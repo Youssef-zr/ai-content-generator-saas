@@ -134,24 +134,86 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('settings.brand_show',1) }}"
-                                class="nav-link {{ setActive('settings/brand/1/edit', 'active') }}">
+                            <a href="{{ route('settings.brand_show') }}"
+                                class="nav-link {{ setActive('brand', 'active') }}">
                                 <i class="fas fa-palette nav-icon"></i>
                                 <p>Brand</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('settings.third_party_show',1) }}"
-                                class="nav-link {{ setActive('settings/third-parties/1/edit', 'active') }}">
+                            <a href="{{ route('settings.third_party_show') }}"
+                                class="nav-link {{ setActive('third-parties', 'active') }}">
                                 <i class="fas fa-cog nav-icon"></i>
                                 <p>Third Party</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('settings.content_show',1) }}"
-                                class="nav-link {{ setActive('settings/content/1/edit', 'active') }}">
+                            <a href="{{ route('settings.content_show') }}"
+                                class="nav-link {{ setActive('content', 'active') }}">
                                 <i class="fa fa-file nav-icon"></i>
                                 <p>Content</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- customize -->
+                <li class="nav-item {{ active_menu('customize')[0] }}">
+                    <a href="#" class="nav-link {{ active_menu('customize')[1] }}" data-toggle="tooltip">
+                        <i class="nav-icon fa fa-paint-brush"></i>
+                        <p>
+                            Customize
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('customize.landing_page_show') }}"
+                                class="nav-link {{ setActive('landing-page', 'active') }}">
+                                <i class="fas fa-file nav-icon"></i>
+                                <p>Landing Page</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('customize.hero_show') }}"
+                                class="nav-link {{ setActive('hero', 'active') }}">
+                                <i class="fas fa-magic nav-icon"></i>
+                                <p>Hero</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('partners.index') }}"
+                                class="nav-link  {{ setActive('partners',"active")  }}">
+                                <i class="fas fa-users nav-icon"></i>
+                                <p>Partners</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('customize.story_show') }}"
+                                class="nav-link {{ setActive('storie', 'active') }}">
+                                <i class="fas fa-book nav-icon"></i>
+                                <p>Story</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('blocks.index') }}"
+                                class="nav-link {{ setActive('blocks', 'active') }}">
+                                <i class="fas fa-th-large nav-icon"></i>
+                                <p>Blocks</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('customize.pricing_show') }}"
+                                class="nav-link {{ setActive('pricing', 'active') }}">
+                                <i class="fa fa-money nav-icon"></i>
+                                <p>Pricing</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('customize.testimonial_show') }}"
+                                class="nav-link {{ setActive('testimonial', 'active') }}">
+                                <i class="fa fa-comments nav-icon"></i>
+                                <p>Testimonial</p>
                             </a>
                         </li>
                     </ul>

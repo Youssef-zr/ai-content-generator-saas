@@ -1,15 +1,27 @@
 <?php
 
-use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Dashboard\EngineController;
-use App\Http\Controllers\Dashboard\LanguageController;
-use App\Http\Controllers\Dashboard\PlanController;
-use App\Http\Controllers\Dashboard\PromptController;
-use App\Http\Controllers\Dashboard\QuestionController;
-use App\Http\Controllers\Dashboard\SettingController;
-use App\Http\Controllers\Dashboard\ToneController;
-use App\Http\Controllers\Dashboard\User\ProfileController;
-use App\Http\Controllers\Dashboard\User\UserController;
+use App\Http\Controllers\Dashboard\{
+    CategoryController,
+    EngineController,
+    LanguageController,
+    PlanController,
+    PromptController,
+    QuestionController,
+    SettingController,
+    ToneController,
+};
+
+use App\Http\Controllers\Dashboard\User\{
+    ProfileController,
+    UserController,
+};
+
+use App\Http\Controllers\Dashboard\Landing\{
+    BlockController,
+    DesignController,
+    PartnerController,
+};
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,17 +44,39 @@ Route::group(["middleware" => "web"], function () {
     Route::resource('languages', LanguageController::class);
     Route::resource('prompts', PromptController::class);
 
+
     // subscriptions
     Route::resource("subscriptions/plans", PlanController::class);
 
     // settings
-    Route::get("settings/brand/{id}/edit", [SettingController::class,"brand_show"])->name('settings.brand_show');
-    Route::put("settings/brand/{id}", [SettingController::class,"brand_update"])->name('settings.brand_update');
-    Route::get("settings/third-parties/{id}/edit", [SettingController::class,"third_party_show"])->name('settings.third_party_show');
-    Route::put("settings/third-parties/open-ai/{id}", [SettingController::class,"update_open_ai_key"])->name('settings.update_open_ai_key');
-    Route::put("settings/third-parties/paypal/{id}", [SettingController::class,"update_paypal_settings"])->name('settings.update_paypal_settings');
-    Route::get("settings/content/{id}/edit", [SettingController::class,"content_show"])->name('settings.content_show');
-    Route::put("settings/content/{id}", [SettingController::class,"content_update"])->name('settings.content_update');
+    Route::get("settings/brand", [SettingController::class, "brand_show"])->name('settings.brand_show');
+    Route::put("settings/brand", [SettingController::class, "brand_update"])->name('settings.brand_update');
+
+    Route::get("settings/third-parties", [SettingController::class, "third_party_show"])->name('settings.third_party_show');
+    Route::put("settings/third-parties/open-ai", [SettingController::class, "update_open_ai_key"])->name('settings.update_open_ai_key');
+    Route::put("settings/third-parties/paypal", [SettingController::class, "update_paypal_settings"])->name('settings.update_paypal_settings');
+
+    Route::get("settings/content", [SettingController::class, "content_show"])->name('settings.content_show');
+    Route::put("settings/content", [SettingController::class, "content_update"])->name('settings.content_update');
+
+    // landing page design
+    Route::get('customize/landing-page', [DesignController::class, "landing_page_show"])->name('customize.landing_page_show');
+    Route::put('customize/landing-page', [DesignController::class, "landing_page_show"])->name('customize.landing_page_update');
+
+    Route::get('customize/hero', [DesignController::class, "hero_show"])->name('customize.hero_show');
+    Route::put('customize/hero', [DesignController::class, "hero_update"])->name('customize.hero_update');
+
+    Route::get('customize/story', [DesignController::class, "story_show"])->name('customize.story_show');
+    Route::put('customize/story', [DesignController::class, "story_update"])->name('customize.story_update');
+
+    Route::get('customize/pricing', [DesignController::class, "price_show"])->name('customize.pricing_show');
+    Route::put('customize/pricing', [DesignController::class, "price_update"])->name('customize.pricing_update');
+
+    Route::get('customize/testimonial', [DesignController::class, "testimonial_show"])->name('customize.testimonial_show');
+    Route::put('customize/testimonial', [DesignController::class, "testimonial_update"])->name('customize.testimonial_update');
+
+    Route::resource("customize/partners", PartnerController::class);
+    Route::resource("customize/blocks", BlockController::class);
 
     // users
     Route::resource('users', UserController::class);

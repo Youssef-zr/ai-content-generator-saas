@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlanRequest;
 use App\Models\Plan;
-use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {

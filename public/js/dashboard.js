@@ -126,4 +126,47 @@ $(() => {
     $(".confirm-delete").click(function () {
         formDelete.submit();
     });
+
+     // start custom input file
+     $(".inputfile").each(function() {
+        var $input = $(this),
+            $label = $input.next("label"),
+            labelVal = $label.html();
+        $input.on("change", function(e) {
+            let $that = $(this);
+            var fileName = "";
+
+            if (this.files && this.files.length > 1)
+                fileName = (
+                    this.getAttribute("data-multiple-caption") || ""
+                ).replace("{count}", this.files.length);
+            else if (e.target.value)
+                fileName = e.target.value.split("\\").pop();
+
+            if (fileName) $label.find("span").html(fileName);
+            else $label.html(labelVal);
+
+            // change image preview
+            const file = this.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function(event) {
+                    // let preview = $($(this).data('preview'));
+                    let preview = $that.attr('data-preview');
+                    $(preview).attr("src", event.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Firefox bug fix
+        $input
+            .on("focus", function() {
+                $input.addClass("has-focus");
+            })
+            .on("blur", function() {
+                $input.removeClass("has-focus");
+            });
+    });
+    // end custom input file
 });

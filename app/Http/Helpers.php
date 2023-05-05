@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Str;
+
 // the request shurthund of admin resource
 if (!function_exists('adminUrl')) {
     function adminUrl($url = null)
@@ -90,7 +93,10 @@ if (!function_exists('activeSideLink')) {
 if (!function_exists('setActive')) {
     function setActive($path, $active = 'text-primary')
     {
-        return request()->server("REQUEST_URI") == '/dashboard/' . $path ? $active : "";
+        $currentUrl = request()->server("REQUEST_URI");
+
+        $contains = Str::contains($currentUrl, $path);
+        return $contains ? $active : "";
     }
 }
 
