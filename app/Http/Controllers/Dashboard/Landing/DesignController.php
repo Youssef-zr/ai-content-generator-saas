@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Dashboard\Landing;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Customize\HeroRequest;
-use App\Http\Requests\Customize\PricingRequest;
-use App\Http\Requests\Customize\TestimonialRequest;
+use App\Http\Requests\Customize\{
+    HeroRequest,
+    PricingRequest,
+    StoryRequest,
+    TestimonialRequest,
+};
+use App\Models\Block;
 use App\Models\Front\Design;
 use App\Traits\UploadFiles;
 
@@ -65,7 +69,7 @@ class DesignController extends Controller
     {
         $lp = $this->landingPage;
 
-        $data= $request->except(['testimonial_avatar']);
+        $data = $request->except(['testimonial_avatar']);
         $lp->fill($data)->save();
 
         $this->update_testimonial_image($lp);
@@ -74,13 +78,13 @@ class DesignController extends Controller
     }
 
     // update testimonial image
-    public function update_testimonial_image($design)
+    public function update_testimonial_image($testimonial)
     {
         if (request()->hasFile("testimonial_avatar")) {
 
             $photo = request()->file('testimonial_avatar');
             $storagePath = "assets/dist/storage/customize/testimonial";
-            $oldFile = $design->testimonial_avatar;
+            $oldFile = $testimonial->testimonial_avatar;
             $default = $oldFile;
 
             $imgProp = [
@@ -94,7 +98,78 @@ class DesignController extends Controller
             ];
 
             $fileInformation = UploadFiles::updateFile($imgProp);
-            $design->fill(['testimonial_avatar' => $fileInformation['file_path']])->save();
+            $testimonial->fill(['testimonial_avatar' => $fileInformation['file_path']])->save();
+        }
+    }
+
+    // story show section
+    public function story_show()
+    {
+        $lp = $this->landingPage;
+        $story_blocks = Block::pluck('title', "id")->toArray();
+
+        return view("admin.pages.customize.sections.story", compact('lp', 'story_blocks'));
+    }
+
+    // story update section
+    public function story_update(StoryRequest $request)
+    {
+        $lp = $this->landingPage;
+
+        $data = $request->except(['story_browser_image', 'story_phone_image']);
+        $data['story_blocks'] = $data['story_blocks'] ?? [];
+        $lp->fill($data)->save();
+
+        $this->update_story_images($lp);
+
+        return redirect_with_flash("msgSuccess", "story section updated successfully", "customize/story");
+    }
+
+    // update story images
+    public function update_story_images($story)
+    {
+        // story browser image
+        if (request()->hasFile("story_browser_image")) {
+
+            $photo = request()->file('story_browser_image');
+            $storagePath = "assets/dist/storage/customize/story/";
+            $oldFile = $story->story_browser_image;
+            $default = $oldFile;
+
+            $imgProp = [
+                'file' => $photo,
+                "storagePath" => $storagePath,
+                "old_image" => $oldFile,
+                "default" => $default,
+                "width" => 1618,
+                "height" => 1010,
+                "quality" => 96
+            ];
+
+            $fileInformation = UploadFiles::updateFile($imgProp);
+            $story->fill(['story_browser_image' => $fileInformation['file_path']])->save();
+        }
+
+        // story phone image
+        if (request()->hasFile("story_phone_image")) {
+
+            $photo = request()->file('story_phone_image');
+            $storagePath = "assets/dist/storage/customize/story/";
+            $oldFile = $story->story_phone_image;
+            $default = $oldFile;
+
+            $imgProp = [
+                'file' => $photo,
+                "storagePath" => $storagePath,
+                "old_image" => $oldFile,
+                "default" => $default,
+                "width" => 407,
+                "height" => 867,
+                "quality" => 96
+            ];
+
+            $fileInformation = UploadFiles::updateFile($imgProp);
+            $story->fill(['story_phone_image' => $fileInformation['file_path']])->save();
         }
     }
 }

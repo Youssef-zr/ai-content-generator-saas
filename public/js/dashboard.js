@@ -122,7 +122,7 @@ $(() => {
         formDelete.attr("action", $url);
     });
 
-    // confim delete
+    // confirm delete
     $(".confirm-delete").click(function () {
         formDelete.submit();
     });

@@ -48,48 +48,44 @@
             </div>
 
             <!-- testimonial image field -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="form-group {{ $errors->has('testimonial_avatar') ? 'has-error' : '' }}">
-                        <label for="testimonial_avatar">
-                            Avatar
-                        </label>
+            <div class="form-group {{ $errors->has('testimonial_avatar') ? 'has-error' : '' }}">
+                <label for="testimonial_avatar">
+                    Avatar
+                </label>
 
-                        <small id="status_block" class="form-text text-muted mt-0">
-                            Recommended size 514px x 440px
-                        </small>
+                <small id="status_block" class="form-text text-muted mt-0">
+                    Recommended size 514px x 440px
+                </small>
 
-                        <small id="status_block" class="form-text text-muted mt-0">
-                            image mimes type : png, jpg, jpeg, fif
-                        </small>
+                <small id="status_block" class="form-text text-muted mt-0">
+                    image mimes type : png, jpg, jpeg, fif
+                </small>
 
-                        <div class="box-input js mt-2">
-                            {!! Form::file('testimonial_avatar', [
-                                'class' => 'inputfile inputfile-1',
-                                'id' => 'file-1',
-                                'data-preview' => '#testimonial-avatar',
-                                'data-multiple-caption' => '{count} files selected',
-                            ]) !!}
-                            <label for="file-1">
-                                <i class="fa fa-upload"></i>
-                                <span>choose file &hellip;</span>
-                            </label>
-                        </div>
-
-                        <div class="image">
-                            <img src="{{ $lp->testimonial_img }}" id="testimonial-avatar" class="img-thumbnail"
-                                style="max-width: 200px">
-                        </div>
-
-                        @if ($errors->has('testimonial_avatar'))
-                            <span class="help-block d-block mt-2">
-                                <strong>{{ $errors->first('testimonial_avatar') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                <div class="box-input js mt-2">
+                    {!! Form::file('testimonial_avatar', [
+                        'class' => 'inputfile inputfile-1',
+                        'id' => 'file-1',
+                        'data-preview' => '#testimonial-avatar',
+                        'data-multiple-caption' => '{count} files selected',
+                    ]) !!}
+                    <label for="file-1">
+                        <i class="fa fa-upload"></i>
+                        <span>choose file &hellip;</span>
+                    </label>
                 </div>
+
+                <div class="image">
+                    <img src="{{ $lp->testimonial_img }}" id="testimonial-avatar" class="img-thumbnail"
+                        style="max-width: 200px">
+                </div>
+
+                @if ($errors->has('testimonial_avatar'))
+                    <span class="help-block d-block mt-2">
+                        <strong>{{ $errors->first('testimonial_avatar') }}</strong>
+                    </span>
+                @endif
             </div>
-            <!-- end row -->
+
 
             <!-- testimonial title field -->
             <div class="form-group {{ $errors->has('testimonial_title') ? 'has-error' : '' }}">

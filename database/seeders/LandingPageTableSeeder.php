@@ -20,7 +20,7 @@ class LandingPageTableSeeder extends Seeder
             "partners" => "HubSpot,Layar,MailChimp,Forbes,Fitbit",
             "story_title" => "What we do?",
             "story_subtitle" => "AI-powered productivity tool for all your creative needs.",
-            "story_blocks" => "In-Depth Analytics,Customizable Output,Intelligent Content Generation",
+            "story_blocks" => [1,2,3],
             "story_promotion" => "It is fast and easy. Generate your first and ongoing content with Genie.",
             "pricing_title" => "Flexible and transparent pricing",
             "pricing_subtitle" => "Whatever your status, our offers evolve according to your needs.",

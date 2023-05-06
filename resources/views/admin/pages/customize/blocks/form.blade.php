@@ -33,54 +33,47 @@
 </div>
 
 <!-- block icon field -->
-<div class="row">
-    <div class="col-12">
-        <div class="form-group {{ $errors->has('icon') ? 'has-error' : '' }}">
-            <label for="icon">
-                Icon
-            </label>
+<div class="form-group {{ $errors->has('icon') ? 'has-error' : '' }}">
+    <label for="icon">
+        Icon
+    </label>
 
-            <small id="status_block" class="form-text text-muted mt-0">
-                Recommended size 68px x 68px
-            </small>
+    <small id="status_block" class="form-text text-muted mt-0">
+        Recommended size 68px x 68px
+    </small>
 
-            <small id="status_block" class="form-text text-muted mt-0">
-                image mimes type : png, jpg, jpeg, fif
-            </small>
+    <small id="status_block" class="form-text text-muted mt-0">
+        image mimes type : png, jpg, jpeg, fif
+    </small>
 
-            <div class="box-input js mt-2">
-                {!! Form::file('icon', [
-                    'class' => 'inputfile inputfile-1',
-                    'id' => 'file-1',
-                    'data-preview' => '#block-preview',
-                    'data-multiple-caption' => '{count} files selected',
-                ]) !!}
-                <label for="file-1">
-                    <i class="fa fa-upload"></i>
-                    <span>choose file &hellip;</span>
-                </label>
-            </div>
-
-            <div class="image">
-                @if (isset($block))
-                    <img src="{{ $block->block_icon }}" id="block-preview" class="img-thumbnail"
-                        style="max-width: 150px">
-                @else
-                    <img src="{{ url('/assets/dist/storage/customize/blocks/default.png') }}" id="block-preview" class="img-thumbnail"
-                        style="max-width: 150px">
-                @endif
-            </div>
-
-            @if ($errors->has('icon'))
-                <span class="help-block d-block mt-2">
-                    <strong>{{ $errors->first('icon') }}</strong>
-                </span>
-            @endif
-        </div>
+    <div class="box-input js mt-2">
+        {!! Form::file('icon', [
+            'class' => 'inputfile inputfile-1',
+            'id' => 'file-1',
+            'data-preview' => '#block-preview',
+            'data-multiple-caption' => '{count} files selected',
+        ]) !!}
+        <label for="file-1">
+            <i class="fa fa-upload"></i>
+            <span>choose file &hellip;</span>
+        </label>
     </div>
-</div>
-<!-- end row -->
 
+    <div class="image">
+        @if (isset($block))
+            <img src="{{ $block->block_icon }}" id="block-preview" class="img-thumbnail" style="max-width: 150px">
+        @else
+            <img src="{{ url('/assets/dist/storage/customize/blocks/default.png') }}" id="block-preview"
+                class="img-thumbnail" style="max-width: 150px">
+        @endif
+    </div>
+
+    @if ($errors->has('icon'))
+        <span class="help-block d-block mt-2">
+            <strong>{{ $errors->first('icon') }}</strong>
+        </span>
+    @endif
+</div>
 
 <!-- submit button -->
 <div class="form-group">
