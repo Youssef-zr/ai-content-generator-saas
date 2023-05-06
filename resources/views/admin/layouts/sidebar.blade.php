@@ -190,7 +190,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('customize.story_show') }}"
-                                class="nav-link {{ setActive('storie', 'active') }}">
+                                class="nav-link {{ setActive('story', 'active') }}">
                                 <i class="fas fa-book nav-icon"></i>
                                 <p>Story</p>
                             </a>
