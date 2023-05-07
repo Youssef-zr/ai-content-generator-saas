@@ -61,7 +61,7 @@ Route::group(["middleware" => "web"], function () {
 
     // landing page design
     Route::get('customize/landing-page', [DesignController::class, "landing_page_show"])->name('customize.landing_page_show');
-    Route::put('customize/landing-page', [DesignController::class, "landing_page_show"])->name('customize.landing_page_update');
+    Route::put('customize/landing-page', [DesignController::class, "landing_page_update"])->name('customize.landing_page_update');
 
     Route::get('customize/hero', [DesignController::class, "hero_show"])->name('customize.hero_show');
     Route::put('customize/hero', [DesignController::class, "hero_update"])->name('customize.hero_update');

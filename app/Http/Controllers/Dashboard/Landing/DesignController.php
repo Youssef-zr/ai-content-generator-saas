@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Dashboard\Landing;
 
 use App\Http\Controllers\Controller;
+use App\Traits\UploadFiles;
+use App\Models\{
+    Block,
+    Partner,
+    Front\Design
+};
 use App\Http\Requests\Customize\{
     HeroRequest,
+    LandingPageRequest,
     PricingRequest,
     StoryRequest,
     TestimonialRequest,
 };
-use App\Models\Block;
-use App\Models\Front\Design;
-use App\Traits\UploadFiles;
 
 class DesignController extends Controller
 {
@@ -23,6 +27,27 @@ class DesignController extends Controller
     {
         $landingPage = Design::findOrFail(1);
         $this->landingPage = $landingPage;
+    }
+
+    // landing page show
+    public function landing_page_show()
+    {
+        $lp = $this->landingPage;
+        $partners = Partner::pluck('title', "id")->toArray();
+
+        return view('admin.pages.customize.sections.landing-page', compact("lp", "partners"));
+    }
+
+    // landing page udate
+    public function landing_page_update(LandingPageRequest $request)
+    {
+        $lp = $this->landingPage;
+
+        $data = $request->all();
+        $data['partners'] = $data['partners'] ?? [];
+        $lp->fill($data)->save();
+
+        return redirect_with_flash("msgSuccess", "Landing page updated successfully", "customize/landing-page");
     }
 
     // show hero section

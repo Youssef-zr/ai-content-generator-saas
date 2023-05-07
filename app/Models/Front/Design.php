@@ -14,7 +14,6 @@ class Design extends Model
         'story_blocks' => "array",
     ];
 
-
     public function getTestimonialImgAttribute()
     {
         $avatar = $this->testimonial_avatar;
