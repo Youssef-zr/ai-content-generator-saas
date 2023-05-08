@@ -98,7 +98,7 @@
 
                 <!-- subscriptions managments -->
                 <li class="nav-item {{ active_menu('subscriptions')[0] }}">
-                    <a href="#" class="nav-link {{ active_menu('subscriptions')[1] }}" data-toggle="tooltip"
+                    <a href="#" class="nav-link subscriptions {{ active_menu('subscriptions')[1] }}" data-toggle="tooltip"
                         title="Subscription Managment">
                         <i class="nav-icon fa fa-paper-plane-o"></i>
                         <p>

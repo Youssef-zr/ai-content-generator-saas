@@ -1,6 +1,10 @@
 $(() => {
-    $('[data-toggle="tooltip"]').tooltip({
+    $('[data-toggle="tooltip"]').not('.subscriptions').tooltip({
         placement: "left",
+    });
+
+    $('.subscriptions').tooltip({
+        placement: "top",
     });
 
     let copyButtonTrans = "Copy";

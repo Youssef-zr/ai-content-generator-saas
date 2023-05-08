@@ -17,14 +17,22 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
-        $guards = empty($guards) ? [null] : $guards;
+        if (Auth::guard($guards)->check()) {
+            $roles = Auth::user()->roles->pluck('name')->toArray();
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+            switch ($roles) {
+                case in_array('Admin', $roles):
+                    return redirect('/admin');
+                    break;
+                case in_array('User', $roles):
+                    return redirect('/user');
+                    break;
+
+                default:
+                    return redirect('/home');
+                    break;
             }
         }
-
         return $next($request);
     }
 }
