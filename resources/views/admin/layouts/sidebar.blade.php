@@ -220,8 +220,8 @@
                 </li>
 
                 <!-- user managments -->
-                <li class="nav-item {{ active_menu('users')[0] }} {{ active_menu('roles')[0] }}">
-                    <a href="#" class="nav-link {{ active_menu('users')[1] }} {{ active_menu('roles')[1] }}">
+                <li class="nav-item {{ active_menu('users')[0] }} {{ active_menu('roles')[0] }} {{ active_menu('permissions')[0] }}">
+                    <a href="#" class="nav-link {{ active_menu('users')[1] }} {{ active_menu('roles')[1] }}  {{ active_menu('permissions')[1] }}">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
                             User Managment
@@ -230,7 +230,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav.html" class="nav-link">
+                            <a href="{{ route('permissions.index') }}" class="nav-link {{ setActive('permissions', 'active') }}">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Permissions</p>
                             </a>

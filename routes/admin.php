@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\{
 };
 
 use App\Http\Controllers\Dashboard\User\{
+    PermissionController,
     ProfileController,
     RoleController,
     UserController,
@@ -84,6 +85,9 @@ Route::group(["middleware" => "web"], function () {
 
     // roles
     Route::resource('roles', RoleController::class);
+
+    // permissions
+    Route::resource('permissions', PermissionController::class);
 
     // user profile routes
     Route::get("profile", [ProfileController::class, 'show_profile'])->name('user.show_profile');
