@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Customize;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LandingPageRequest extends FormRequest
+class RoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,16 @@ class LandingPageRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            "hero_title" => "required|string|max:255",
-            "partners" => "required|array",
-            "story_title" => "required|string|max:255",
-            "pricing_title" => "required|string|max:255",
-            "testimonial_review" => "required|string|max:255",
+        $rules = [
+            "name" => "required|string|max:255|unique:roles,name",
+            "permissions" => "required|array",
         ];
+
+        $method = strtolower(request()->method());
+        if ($method == "put") {
+            $rules["name"] = "required|string|max:255|unique:roles,name," . request()->role->id;
+        }
+
+        return $rules;
     }
 }

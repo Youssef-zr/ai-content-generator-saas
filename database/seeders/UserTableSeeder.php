@@ -2,10 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use App\Models\{
+    Role,
+    User
+};
+
 
 class UserTableSeeder extends Seeder
 {
@@ -14,11 +17,14 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = new User();
-        $user->name = "youssef";
-        $user->email = "yn-neinaa@hotmail.com";
-        $user->password = Hash::make('123456');
+        $admin = new User();
+        $admin->name = "youssef";
+        $admin->email = "yn-neinaa@hotmail.com";
+        $admin->password = Hash::make('123456');
 
-        $user->save();
+        $admin->save();
+
+        $adminRole = Role::where('name', "=", "admin")->select("id")->first();
+        $admin->addRole($adminRole);
     }
 }

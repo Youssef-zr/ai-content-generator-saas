@@ -183,7 +183,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('partners.index') }}"
-                                class="nav-link  {{ setActive('partners',"active")  }}">
+                                class="nav-link  {{ setActive('partners', 'active') }}">
                                 <i class="fas fa-users nav-icon"></i>
                                 <p>Partners</p>
                             </a>
@@ -220,8 +220,8 @@
                 </li>
 
                 <!-- user managments -->
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ active_menu('users')[0] }} {{ active_menu('roles')[0] }}">
+                    <a href="#" class="nav-link {{ active_menu('users')[1] }} {{ active_menu('roles')[1] }}">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
                             User Managment
@@ -236,27 +236,22 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                            <a href="{{ route('roles.index') }}" class="nav-link {{ setActive('roles', 'active') }}">
                                 <i class="fas fa-briefcase nav-icon"></i>
                                 <p>Roles</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/layout/boxed.html" class="nav-link">
+                            <a href="{{ route('users.index') }}"
+                                class="nav-link {{ setActive('users', 'active') }}">
                                 <i class="fa fa-user nav-icon"></i>
-                                <p>users</p>
+                                <p>Users</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="pages/layout/fixed-sidebar.html" class="nav-link">
                                 <i class="fas fa-file-alt nav-icon"></i>
                                 <p>Audit Logs</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                                <i class="fas fa-key nav-icon"></i>
-                                <p>change Password</p>
                             </a>
                         </li>
                     </ul>

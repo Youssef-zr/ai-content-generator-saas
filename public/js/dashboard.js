@@ -1,5 +1,7 @@
 $(() => {
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip({
+        placement: "left",
+    });
 
     let copyButtonTrans = "Copy";
     let csvButtonTrans = "CSV";
@@ -127,12 +129,12 @@ $(() => {
         formDelete.submit();
     });
 
-     // start custom input file
-     $(".inputfile").each(function() {
+    // start custom input file
+    $(".inputfile").each(function () {
         var $input = $(this),
             $label = $input.next("label"),
             labelVal = $label.html();
-        $input.on("change", function(e) {
+        $input.on("change", function (e) {
             let $that = $(this);
             var fileName = "";
 
@@ -150,9 +152,9 @@ $(() => {
             const file = this.files[0];
             if (file) {
                 let reader = new FileReader();
-                reader.onload = function(event) {
+                reader.onload = function (event) {
                     // let preview = $($(this).data('preview'));
-                    let preview = $that.attr('data-preview');
+                    let preview = $that.attr("data-preview");
                     $(preview).attr("src", event.target.result);
                 };
                 reader.readAsDataURL(file);
@@ -161,10 +163,10 @@ $(() => {
 
         // Firefox bug fix
         $input
-            .on("focus", function() {
+            .on("focus", function () {
                 $input.addClass("has-focus");
             })
-            .on("blur", function() {
+            .on("blur", function () {
                 $input.removeClass("has-focus");
             });
     });

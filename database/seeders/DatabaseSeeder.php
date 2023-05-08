@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UserTableSeeder::class,
+            LaratrustSeeder::class,
             CategoryTableSeeder::class,
             QuestionTableSeeder::class,
             ToneTableSeeder::class,
