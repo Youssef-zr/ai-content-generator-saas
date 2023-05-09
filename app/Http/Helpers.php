@@ -7,9 +7,9 @@ if (!function_exists('adminUrl')) {
     function adminUrl($url = null)
     {
         if (env('APP_ENV') == "production") {
-            return secure_url('/dashboard/' . $url);
+            return secure_url('/admin/' . $url);
         } else {
-            return url('/dashboard/' . $url);
+            return url('/admin/' . $url);
         }
     }
 }

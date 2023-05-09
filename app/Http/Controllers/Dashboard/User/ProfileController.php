@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Dashboard\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UserPasswordRequest;
-use App\Http\Requests\User\UserProfileRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Traits\UploadFiles;
+use App\Http\Requests\User\{
+    UserPasswordRequest,
+    UserProfileRequest
+};
+use Illuminate\Support\Facades\{
+    Auth,
+    Hash,
+};
 
 class ProfileController extends Controller
 {
+    use UploadFiles;
     // show user profile information
     public function show_profile()
     {
@@ -21,7 +27,10 @@ class ProfileController extends Controller
     public function update_information(UserProfileRequest $request)
     {
         $user = Auth::user();
-        $user->fill($request->all())->save();
+        $data = $request->except(["image"]);
+        $user->fill($data)->save();
+
+        $this->update_user_avatar($user);
 
         return redirect_with_flash("msgSuccess", "Your Information Was Updated Successfully", 'profile');
     }
@@ -44,5 +53,30 @@ class ProfileController extends Controller
         Auth::logout();
 
         return redirect(url('login'));
+    }
+
+    // update user profile avatar image
+    public function update_user_avatar($user)
+    {
+        if (request()->hasFile("image")) {
+
+            $photo = request()->file('image');
+            $storagePath = "assets/dist/storage/users/";
+            $oldFile = $user->image;
+            $default = $oldFile;
+
+            $imgProp = [
+                'file' => $photo,
+                "storagePath" => $storagePath,
+                "old_image" => $oldFile,
+                "default" => $default,
+                "width" => 90,
+                "height" => 90,
+                "quality" => 96
+            ];
+
+            $fileInformation = UploadFiles::updateFile($imgProp);
+            $user->fill(['image' => $fileInformation['file_path']])->save();
+        }
     }
 }

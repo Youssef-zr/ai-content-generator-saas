@@ -34,8 +34,46 @@
                 </div>
                 <div class="card-body">
                     <!-- form update user information -->
-                    {!! Form::model($auth_user, ['route' => 'user.update_information']) !!}
+                    {!! Form::model($auth_user, ['route' => 'user.update_information', 'files' => true]) !!}
                     @method('put')
+                    <!-- testimonial image field -->
+                    <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                        <label for="image">
+                            Avatar
+                        </label>
+
+                        <small id="status_block" class="form-text text-muted mt-0">
+                            Recommended size 215px x 215px
+                        </small>
+
+                        <small id="status_block" class="form-text text-muted mt-0">
+                            image mimes type : png, jpg, jpeg, fif
+                        </small>
+
+                        <div class="box-input js mt-2">
+                            {!! Form::file('image', [
+                                'class' => 'inputfile inputfile-1',
+                                'id' => 'file-1',
+                                'data-preview' => '#partner-preview',
+                                'data-multiple-caption' => '{count} files selected',
+                            ]) !!}
+                            <label for="file-1">
+                                <i class="fa fa-upload"></i>
+                                <span>choose file &hellip;</span>
+                            </label>
+                        </div>
+
+                        <div class="image">
+                            <img src="{{ $auth_user->image_path }}" id="partner-preview" class="img-thumbnail avatar-image">
+                        </div>
+
+                        @if ($errors->has('image'))
+                            <span class="help-block d-block mt-2">
+                                <strong>{{ $errors->first('image') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+
                     <!-- name field -->
                     <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
                         <div class="option">
@@ -167,3 +205,13 @@
         </div>
     </div>
 @endsection
+
+@push('css')
+    <style>
+        .avatar-image {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%
+        }
+    </style>
+@endpush

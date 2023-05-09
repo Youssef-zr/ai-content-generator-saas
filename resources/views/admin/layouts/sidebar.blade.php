@@ -12,11 +12,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ url('adminLte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                    alt="User Image">
+                <img src="{{ auth()->user()->image_path }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="{{ route('user.show_profile') }}" class="d-block">{{ auth()->user()->name }}</a>
             </div>
         </div>
 
@@ -98,8 +97,8 @@
 
                 <!-- subscriptions managments -->
                 <li class="nav-item {{ active_menu('subscriptions')[0] }}">
-                    <a href="#" class="nav-link subscriptions {{ active_menu('subscriptions')[1] }}" data-toggle="tooltip"
-                        title="Subscription Managment">
+                    <a href="#" class="nav-link subscriptions {{ active_menu('subscriptions')[1] }}"
+                        data-toggle="tooltip" title="Subscription Managment">
                         <i class="nav-icon fa fa-paper-plane-o"></i>
                         <p>
                             Subscriptions
@@ -220,8 +219,10 @@
                 </li>
 
                 <!-- user managments -->
-                <li class="nav-item {{ active_menu('users')[0] }} {{ active_menu('roles')[0] }} {{ active_menu('permissions')[0] }}">
-                    <a href="#" class="nav-link {{ active_menu('users')[1] }} {{ active_menu('roles')[1] }}  {{ active_menu('permissions')[1] }}">
+                <li
+                    class="nav-item {{ active_menu('users')[0] }} {{ active_menu('roles')[0] }} {{ active_menu('permissions')[0] }}">
+                    <a href="#"
+                        class="nav-link {{ active_menu('users')[1] }} {{ active_menu('roles')[1] }}  {{ active_menu('permissions')[1] }}">
                         <i class="nav-icon fa fa-users"></i>
                         <p>
                             User Managment
@@ -230,13 +231,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('permissions.index') }}" class="nav-link {{ setActive('permissions', 'active') }}">
+                            <a href="{{ route('permissions.index') }}"
+                                class="nav-link {{ setActive('permissions', 'active') }}">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Permissions</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('roles.index') }}" class="nav-link {{ setActive('roles', 'active') }}">
+                            <a href="{{ route('roles.index') }}"
+                                class="nav-link {{ setActive('roles', 'active') }}">
                                 <i class="fas fa-briefcase nav-icon"></i>
                                 <p>Roles</p>
                             </a>

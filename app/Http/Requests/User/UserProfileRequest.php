@@ -23,7 +23,8 @@ class UserProfileRequest extends FormRequest
     {
         $rules = [
             "name" => "required|string|min:4|max:100",
-            "email" => "required|email|unique:users,email," . auth()->id()
+            "email" => "required|email|unique:users,email," . auth()->id(),
+            "image" => "sometimes|nullable|image|mimes:png,jpg,jpeg,gif"
         ];
 
         return $rules;

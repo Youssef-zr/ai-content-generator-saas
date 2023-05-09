@@ -11,18 +11,15 @@ use Laratrust\Traits\HasRolesAndPermissions;
 
 class User extends Authenticatable  implements LaratrustUser
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRolesAndPermissions;
+    use HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = ["image_path"];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +39,16 @@ class User extends Authenticatable  implements LaratrustUser
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getImagePathAttribute()
+    {
+        $avatar = $this->image;
+
+        if ($avatar == "default.png") {
+            $storagePath = "assets/dist/storage/users/";
+            $this->image = $storagePath . $avatar;
+        }
+
+        return url($this->image);
+    }
 }
