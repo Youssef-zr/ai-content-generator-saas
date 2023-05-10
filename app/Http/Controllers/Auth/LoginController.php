@@ -28,10 +28,10 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
+
     public function redirectTo()
     {
         $roles = Auth::user()->roles->pluck('name')->toArray();
-
         switch ($roles) {
             case in_array('Admin', $roles):
                 return '/admin';
@@ -46,7 +46,6 @@ class LoginController extends Controller
         }
     }
 
-
     /**
      * Create a new controller instance.
      *
@@ -55,14 +54,5 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }
-
-    public function authenticated()
-    {
-        if (!auth()->user()->hasRole('Admin')) {
-            return redirect('/admin');
-        }
-
-        return redirect('/user');
     }
 }

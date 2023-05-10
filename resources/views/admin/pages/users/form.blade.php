@@ -60,19 +60,10 @@
         {!! Form::label('roles', 'roles', ['class' => 'form-label']) !!}
         <span class="star text-danger">*</span>
     </div>
-    <div class="select mb-2">
-        <button class="btn btn-primary btn-sm" id="select-all"
-            data-roles="{{ implode(',',isset($user)? $user->roles()->pluck('id')->toArray(): []) }}">
-            <i class="fa fa-check"></i> Select All
-        </button>
-        <button class="btn btn-danger btn-sm" id="deselect-all">
-            <i class="fa fa-times"></i> Deselect All
-        </button>
-    </div>
+
     {!! Form::select('roles[]', $roles, old('roles[]'), [
-        'class' => 'form-control select-2',
+        'class' => 'form-control',
         'id' => 'roles',
-        'multiple' => true,
     ]) !!}
 
     @if ($errors->has('roles'))
@@ -97,42 +88,3 @@
     @endif
 </div>
 
-
-@push('css')
-    {{ Html::style('adminLte/plugins/select2/css/select2.css') }}
-    <style>
-        .select2-container--default .select2-selection--multiple .select2-selection__choice {
-            background-color: #1c0656;
-            border: 1px solid #1c0656;
-            padding: 0 5px 2px;
-        }
-    </style>
-@endpush
-
-@push('javascript')
-    {{ Html::script('adminLte/plugins/select2/js/select2.js') }}
-
-    <script>
-        $(() => {
-            $('.select-2').select2();
-
-            let $roles = $('select[id="roles"]');
-            $('#select-all').on('click', function(e) {
-                e.preventDefault();
-                let roles = $(this).data('roles');
-                let roles_list = String(roles).split(',');
-
-                $roles.val(roles_list);
-                $roles.trigger('change');
-            })
-
-            $('#deselect-all').on('click', function(e) {
-                e.preventDefault();
-
-                if ($roles.length > 0) {
-                    $roles.val(null).trigger('change')
-                }
-            })
-        })
-    </script>
-@endpush

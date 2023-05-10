@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Dashboard\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserRequest;
-use Illuminate\Http\Request;
 use App\Models\{
     Role,
     User,
@@ -29,6 +28,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name', "id")->toArray();
+
         return view("admin.pages.users.create", compact("roles"));
     }
 
@@ -37,6 +37,7 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+
         $data = $request->except(["roles", "password"]);
         $data['password'] = bcrypt($request->password);
         $roles = $request->roles;
@@ -61,6 +62,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::pluck('name', "id")->toArray();
+
         return view("admin.pages.users.update", compact("user", "roles"));
     }
 
@@ -85,7 +87,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        
+
         return redirect_with_flash("msgSuccess", "User deleted successfully", "users");
     }
 }

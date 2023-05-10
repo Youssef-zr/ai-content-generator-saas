@@ -36,6 +36,7 @@
                     <!-- form update user information -->
                     {!! Form::model($auth_user, ['route' => 'user.update_information', 'files' => true]) !!}
                     @method('put')
+                    
                     <!-- testimonial image field -->
                     <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                         <label for="image">
@@ -131,6 +132,7 @@
                 </div>
             </div>
         </div>
+
         <!-- user password form -->
         <div class="col-md-6">
             <div class="card card-info">
