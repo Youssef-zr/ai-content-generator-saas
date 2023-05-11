@@ -27,9 +27,11 @@ use App\Http\Controllers\Dashboard\User\UserController;
 
 
 Route::group(["middleware" => ["web", "auth", 'role:Admin']], function () {
-    Route::get('/', [DashboardController::class, "statistics"]);
+    Route::get('/', [DashboardController::class, "statistics"])->name('dashboard.statistics');
 
     Route::resource('categories', CategoryController::class);
+    Route::get("/category/delete-all", [CategoryController::class, "delete_all"])->name('categories.delete-all');
+
     Route::resource('questions', QuestionController::class);
     Route::resource('tones', ToneController::class);
     Route::resource('engines', EngineController::class);

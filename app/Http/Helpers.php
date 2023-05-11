@@ -114,10 +114,8 @@ if (!function_exists("active_menu")) {
 if (!function_exists("active_dashboard_item")) {
     function active_dashboard_item($link)
     {
-        if (preg_match('/' . $link . '/i', request()->segment(2)) && request()->segment(3) == "") {
-            return ["active"];
-        } else {
-            return [""];
+        if (request()->segment(2) == null and $link == "dashboard") {
+            return "active";
         }
     }
 }

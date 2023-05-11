@@ -59,4 +59,17 @@ class CategoryController extends Controller
         $category->delete();
         return redirect_with_flash("msgSuccess", "Category removed successfully", "categories");
     }
+
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $category_ids = json_decode(request()->categories, true);
+        $categories = Category::whereIn("id", $category_ids);
+
+        $categories->delete();
+
+        return redirect_with_flash("msgSuccess", "Categories removed successfully", "categories");
+    }
 }

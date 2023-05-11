@@ -1,9 +1,9 @@
 $(() => {
-    $('[data-toggle="tooltip"]').not('.subscriptions').tooltip({
+    $('[data-toggle="tooltip"]').not(".subscriptions").tooltip({
         placement: "left",
     });
 
-    $('.subscriptions').tooltip({
+    $(".subscriptions").tooltip({
         placement: "top",
     });
 
@@ -13,6 +13,8 @@ $(() => {
     let pdfButtonTrans = "PDF";
     let printButtonTrans = "Print";
     let colvisButtonTrans = "Columns";
+    let selectAllButtonTrans = "Select All";
+    let selectNoneButtonTrans = "Desellect All";
 
     let languages = {
         en: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json",
@@ -46,27 +48,27 @@ $(() => {
         pageLength: 10,
         dom: 'lBfrtip<"actions">',
         buttons: [
-            // {
-            //     extend: "selectAll",
-            //     className: "btn-primary",
-            //     text: selectAllButtonTrans,
-            //     exportOptions: {
-            //         columns: ":visible",
-            //     },
-            //     action: function (e, dt) {
-            //         e.preventDefault();
-            //         dt.rows().deselect();
-            //         dt.rows({ search: "applied" }).select();
-            //     },
-            // },
-            // {
-            //     extend: "selectNone",
-            //     className: "btn-primary",
-            //     text: selectNoneButtonTrans,
-            //     exportOptions: {
-            //         columns: ":visible",
-            //     },
-            // },
+            {
+                extend: "selectAll",
+                className: "btn-primary btn-disabled",
+                text: selectAllButtonTrans,
+                exportOptions: {
+                    columns: ":visible",
+                },
+                action: function (e, dt) {
+                    e.preventDefault();
+                    dt.rows().deselect();
+                    dt.rows({ search: "applied" }).select();
+                },
+            },
+            {
+                extend: "selectNone",
+                className: "btn-primary",
+                text: selectNoneButtonTrans,
+                exportOptions: {
+                    columns: ":visible",
+                },
+            },
             {
                 extend: "copy",
                 className: "btn-default",
@@ -114,6 +116,10 @@ $(() => {
                 exportOptions: {
                     columns: ":visible",
                 },
+            },
+            {
+                text: "Delete all",
+                className: "btn-danger delete-all",
             },
         ],
     });

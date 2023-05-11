@@ -4,7 +4,7 @@
     <a href="index3.html" class="brand-link">
         <img src="{{ url('adminLte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Fiverr Sass</span>
     </a>
 
     <!-- Sidebar -->
@@ -26,11 +26,11 @@
 
                 <!-- dashboard -->
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{ route('dashboard.statistics') }}"
+                        class="nav-link {{ active_dashboard_item('dashboard') }}">
                         <i class="nav-icon fa fa-dashboard"></i>
                         <p>
                             Dashboard
-                            <span class="right badge badge-danger">New</span>
                         </p>
                     </a>
                 </li>

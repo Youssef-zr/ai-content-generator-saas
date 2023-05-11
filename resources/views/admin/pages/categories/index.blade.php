@@ -40,7 +40,8 @@
             <table class="table table-striped table-hovered" style="width:100%">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:50px">#</th>
                         <th>Title</th>
                         <th style="width:180px">Actions</th>
                     </tr>
@@ -48,6 +49,13 @@
                 <tbody>
                     @foreach ($categories as $category)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $category->id }}" name="category_ids[]"
+                                        class="form-check-input checkbox-item" id="category-{{ $category->id }}">
+                                    <label for="category-{{ $category->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->title }}</td>
                             <td>
@@ -69,4 +77,52 @@
 
     <!-- Modal Remove Category -->
     @include('admin.modals.remove-item')
+
+    <!-- Modal Remove slected Category Rows -->
+    @include('admin.modals.remove-all')
 @endsection
+
+@push('javascript')
+    <script>
+        $(() => {
+            // select all checbox items
+            $('body').on('click', ".buttons-select-all", function() {
+                $('.checkbox-item').each(function() {
+                    $(this).prop("checked", true);
+                })
+            });
+
+            // deselect all checbox items
+            $('body').on('click', ".buttons-select-none", function() {
+                $('.checkbox-item').each(function() {
+                    $(this).prop("checked", false);
+                })
+            });
+
+            // remove all categories
+            $('body').on('click', ".delete-all", function() {
+                let category_ids = $('.checkbox-item:checked');
+                if (category_ids.length > 0) {
+                    let ids = [];
+                    category_ids.each(function() {
+                        ids.push($(this).val());
+                    })
+
+                    let url = `{{ route('categories.delete-all') }}?categories=${JSON.stringify(ids)}`;
+                    window.location = url;
+                }
+            })
+        })
+    </script>
+@endpush
+
+@push('css')
+    <style>
+        .checkbox-item {
+            position: static;
+            width: 20px;
+            height: 20px;
+            margin-left: -5px
+        }
+    </style>
+@endpush
