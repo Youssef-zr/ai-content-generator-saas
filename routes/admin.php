@@ -33,6 +33,8 @@ Route::group(["middleware" => ["web", "auth", 'role:Admin']], function () {
     Route::get("/category/delete-all", [CategoryController::class, "delete_all"])->name('categories.delete-all');
 
     Route::resource('questions', QuestionController::class);
+    Route::get("/question/delete-all", [QuestionController::class, "delete_all"])->name('questions.delete-all');
+
     Route::resource('tones', ToneController::class);
     Route::resource('engines', EngineController::class);
     Route::resource('languages', LanguageController::class);

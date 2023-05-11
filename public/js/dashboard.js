@@ -181,4 +181,42 @@ $(() => {
             });
     });
     // end custom input file
+
+    // select all checbox items
+    $("body").on("click", ".buttons-select-all", function () {
+        $(".checkbox-item").each(function () {
+            $(this).prop("checked", true);
+        });
+    });
+
+    // deselect all checbox items
+    $("body").on("click", ".buttons-select-none", function () {
+        $(".checkbox-item").each(function () {
+            $(this).prop("checked", false);
+        });
+    });
+
+    // remove all rows confirmation msg
+    $("body").on("click", ".delete-all", function () {
+        let dt_rows_checked = $(".checkbox-item:checked");
+        if (dt_rows_checked.length > 0) {
+            $("#remove-all-rows").modal("show");
+        }
+    });
+    
+    // remove all selected rows
+    $(".confirm-delete-all").on("click", function () {
+        let dt_rows_checked = $(".checkbox-item:checked");
+        if (dt_rows_checked.length > 0) {
+            let ids = [];
+            dt_rows_checked.each(function () {
+                ids.push($(this).val());
+            });
+
+            let url = `${$(".table").data("remove")}?ids=${JSON.stringify(
+                ids
+            )}`;
+            window.location = url;
+        }
+    });
 });

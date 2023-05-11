@@ -65,11 +65,15 @@ class CategoryController extends Controller
      */
     public function delete_all()
     {
-        $category_ids = json_decode(request()->categories, true);
-        $categories = Category::whereIn("id", $category_ids);
+        $category_ids = json_decode(request()->ids, true);
 
-        $categories->delete();
+        if (count($category_ids) > 0) {
+            $categories = Category::whereIn("id", $category_ids);
+            $categories->delete();
 
-        return redirect_with_flash("msgSuccess", "Categories removed successfully", "categories");
+            return redirect_with_flash("msgSuccess", "Categories removed successfully", "categories");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "categories");
     }
 }

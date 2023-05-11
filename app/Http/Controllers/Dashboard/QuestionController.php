@@ -68,4 +68,21 @@ class QuestionController extends Controller
         $question->delete();
         return redirect_with_flash("msgSuccess", "Question removed successfully", "questions");
     }
+
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $question_ids = json_decode(request()->ids, true);
+
+        if (count($question_ids) > 0) {
+            $questions = Question::whereIn("id", $question_ids);
+            $questions->delete();
+
+            return redirect_with_flash("msgSuccess", "Questions removed successfully", "questions");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "questions");
+    }
 }

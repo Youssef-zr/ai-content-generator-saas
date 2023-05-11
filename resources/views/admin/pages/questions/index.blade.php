@@ -37,10 +37,12 @@
             <h3 class="card-title"><i class="fa fa-question-circle-o mr-1"></i> Questions List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%">
+            <table class="table table-striped table-hovered" style="width:100%"
+                data-remove="{{ route('questions.delete-all') }}">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:20px">#</th>
                         <th>Question</th>
                         <th>Type</th>
                         <th>Required</th>
@@ -51,6 +53,13 @@
                 <tbody>
                     @foreach ($questions as $question)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $question->id }}" name="question_ids[]"
+                                        class="form-check-input checkbox-item" id="question-{{ $question->id }}">
+                                    <label for="question-{{ $question->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $question->id }}</td>
                             <td>{{ $question->question }}</td>
                             <td>{{ question_type()[$question->type] }}</td>
@@ -79,4 +88,7 @@
 
     <!-- Modal Remove question -->
     @include('admin.modals.remove-item')
+
+    <!-- Modal Remove slected Rows -->
+    @include('admin.modals.remove-all')
 @endsection

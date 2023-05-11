@@ -4,9 +4,15 @@
     border-color: #dc3545 !important;
     box-shadow: none;
 }
-[class*=icheck-]{
+[class*="icheck-"] {
     margin-top: 3px !important;
     margin-bottom: 0 !important;
+}
+.checkbox-item {
+    position: static;
+    width: 20px;
+    height: 20px;
+    margin-left: -5px;
 }
 .ck-editor__editable,
 textarea {
@@ -63,6 +69,11 @@ table.dataTable thead .sorting_desc {
     background-image: none;
 }
 
+table thead tr > th:nth-of-type(2),
+table tbody tr > td:nth-of-type(2) {
+    text-align: left;
+    padding-left: 5px;
+}
 .btn-group-xs > .btn,
 .btn-xs {
     padding: 1px 5px;
