@@ -37,8 +37,7 @@
             <h3 class="card-title"><i class="fa fa-question-circle-o mr-1"></i> Questions List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%"
-                data-remove="{{ route('questions.delete-all') }}">
+            <table class="table table-striped table-hovered w-100" data-remove="{{ route('questions.delete-all') }}">
                 <thead>
                     <tr>
                         <th style="width:5px"></th>

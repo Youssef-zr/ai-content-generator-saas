@@ -37,10 +37,11 @@
             <h3 class="card-title"><i class="fa fa-keyboard-o mr-1"></i> Prompts List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%">
+            <table class="table table-striped table-hovered w-100" data-remove="{{ route('prompts.delete-all') }}">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:20px">#</th>
                         <th>Type</th>
                         <th>Title</th>
                         <th>Max Tokens</th>
@@ -52,6 +53,13 @@
                 <tbody>
                     @foreach ($prompts as $prompt)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $prompt->id }}" name="prompt_ids[]"
+                                        class="form-check-input checkbox-item" id="prompt-{{ $prompt->id }}">
+                                    <label for="prompt-{{ $prompt->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $prompt->id }}</td>
                             <td>{{ $prompt->type }}</td>
                             <td>{{ $prompt->title }}</td>
@@ -83,4 +91,7 @@
 
     <!-- Modal Remove Prompt -->
     @include('admin.modals.remove-item')
+
+    <!-- Modal Remove slected Rows -->
+    @include('admin.modals.remove-all')
 @endsection

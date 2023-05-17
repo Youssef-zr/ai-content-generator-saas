@@ -1,7 +1,7 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'Laravel',
+    'name' => 'fiverr-sass',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost',
@@ -10,7 +10,7 @@
     'locale' => 'en',
     'fallback_locale' => 'en',
     'faker_locale' => 'en_US',
-    'key' => 'base64:wXrcYe7Bv3V+qji4s8aa6S9rSUcEnXL0dDotSe2ERRk=',
+    'key' => 'base64:BeB7RA61pvNXP1YXfJPZrIdxg/zPS/HGBb2nboe7i5I=',
     'cipher' => 'AES-256-CBC',
     'maintenance' => 
     array (
@@ -245,7 +245,7 @@
         'driver' => 'octane',
       ),
     ),
-    'prefix' => 'laravel_cache_',
+    'prefix' => 'fiverr_sass_cache_',
   ),
   'cors' => 
   array (
@@ -344,7 +344,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'laravel_database_',
+        'prefix' => 'fiverr_sass_database_',
       ),
       'default' => 
       array (
@@ -608,7 +608,7 @@
     'from' => 
     array (
       'address' => 'hello@example.com',
-      'name' => 'Laravel',
+      'name' => 'fiverr-sass',
     ),
     'markdown' => 
     array (
@@ -735,7 +735,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'laravel_session',
+    'cookie' => 'fiverr_sass_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,

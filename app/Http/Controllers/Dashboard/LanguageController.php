@@ -59,4 +59,21 @@ class LanguageController extends Controller
         $language->delete();
         return redirect_with_flash("msgSuccess", "Language deleted successfully", "languages");
     }
+
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $languages_ids = json_decode(request()->ids, true);
+        
+        if (count($languages_ids) > 0) {
+            $languages = Language::whereIn("id", $languages_ids);
+            $languages->delete();
+
+            return redirect_with_flash("msgSuccess", "Languages removed successfully", "languages");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "languages");
+    }
 }

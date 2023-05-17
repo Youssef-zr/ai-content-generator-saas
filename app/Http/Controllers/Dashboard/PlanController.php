@@ -39,7 +39,7 @@ class PlanController extends Controller
      */
     public function show(Plan $plan)
     {
-        return view('admin.pages.plans.show',compact("plan"));
+        return view('admin.pages.plans.show', compact("plan"));
     }
 
     /**
@@ -55,8 +55,8 @@ class PlanController extends Controller
      */
     public function update(PlanRequest $request, Plan $plan)
     {
-       $plan->fill($request->all())->save();
-       return redirect_with_flash("msgSuccess","Plan updated successfully","plans");
+        $plan->fill($request->all())->save();
+        return redirect_with_flash("msgSuccess", "Plan updated successfully", "plans");
     }
 
     /**
@@ -65,6 +65,23 @@ class PlanController extends Controller
     public function destroy(Plan $plan)
     {
         $plan->delete();
-        return redirect_with_flash("msgSuccess","Plan deleted successfully","plans");
+        return redirect_with_flash("msgSuccess", "Plan deleted successfully", "plans");
+    }
+
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $plans_ids = json_decode(request()->ids, true);
+
+        if (count($plans_ids) > 0) {
+            $plans = Plan::whereIn("id", $plans_ids);
+            $plans->delete();
+
+            return redirect_with_flash("msgSuccess", "Plans removed successfully", "plans");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "plans");
     }
 }

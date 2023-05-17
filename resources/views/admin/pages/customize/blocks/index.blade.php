@@ -37,10 +37,11 @@
             <h3 class="card-title"><i class="fas fa-th-large mr-1"></i> Blocks List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%">
+            <table class="table table-striped table-hovered w-100" data-remove="{{ route('blocks.delete-all') }}">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:20px">#</th>
                         <th>Title</th>
                         <th>subtitle</th>
                         <th>icon</th>
@@ -50,11 +51,19 @@
                 <tbody>
                     @foreach ($blocks as $block)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $block->id }}" name="block_ids[]"
+                                        class="form-check-input checkbox-item" id="block-{{ $block->id }}">
+                                    <label for="block-{{ $block->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $block->id }}</td>
                             <td>{{ $block->title }}</td>
                             <td>{{ $block->subtitle }}</td>
                             <td>
-                                <img src="{{ $block->block_icon }}" alt="{{ $block->title }}" class="img-thumbnail" style="width:60px;height:60px">
+                                <img src="{{ $block->block_icon }}" alt="{{ $block->title }}" class="img-thumbnail"
+                                    style="width:60px;height:60px">
                             </td>
                             <td>
                                 <a href="{{ route('blocks.edit', $block->id) }}" class="btn btn-warning btn-sm"
@@ -75,4 +84,7 @@
 
     <!-- Modal Remove block -->
     @include('admin.modals.remove-item')
+
+    <!-- Modal Remove slected Rows -->
+    @include('admin.modals.remove-all')
 @endsection

@@ -39,7 +39,7 @@ class EngineController extends Controller
      */
     public function show(Engine $engine)
     {
-        return view("admin.pages.engines.show",compact('engine'));
+        return view("admin.pages.engines.show", compact('engine'));
     }
 
     /**
@@ -66,5 +66,22 @@ class EngineController extends Controller
     {
         $engine->delete();
         return redirect_with_flash("msgSuccess", "Engine deleted successfully", "engines");
+    }
+
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $engines_ids = json_decode(request()->ids, true);
+
+        if (count($engines_ids) > 0) {
+            $engines = Engine::whereIn("id", $engines_ids);
+            $engines->delete();
+
+            return redirect_with_flash("msgSuccess", "Engines removed successfully", "engines");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "engines");
     }
 }

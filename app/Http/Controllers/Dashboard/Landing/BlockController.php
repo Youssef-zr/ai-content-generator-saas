@@ -77,7 +77,23 @@ class BlockController extends Controller
 
         return redirect_with_flash("msgSuccess", "Block deleted successfully", "customize/blocks");
     }
+    
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $blocks_ids = json_decode(request()->ids, true);
 
+        if (count($blocks_ids) > 0) {
+            $blocks = Block::whereIn("id", $blocks_ids);
+            $blocks->delete();
+
+            return redirect_with_flash("msgSuccess", "Blocks removed successfully", "customize/blocks");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "customize/blocks");
+    }
 
     // store partner image
     public function update_logo($partner)

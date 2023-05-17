@@ -81,6 +81,23 @@ class PromptController extends Controller
         $prompt->delete();
         return redirect_with_flash("msgSuccess", "Prompt deleted successfully", "prompts");
     }
+    
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $prompts_ids = json_decode(request()->ids, true);
+
+        if (count($prompts_ids) > 0) {
+            $prompts = Prompt::whereIn("id", $prompts_ids);
+            $prompts->delete();
+
+            return redirect_with_flash("msgSuccess", "Prompts removed successfully", "prompts");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "prompts");
+    }
 
     // global data
     public function tableData($table_name)

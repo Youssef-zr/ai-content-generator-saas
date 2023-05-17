@@ -37,10 +37,11 @@
             <h3 class="card-title"><i class="fas fa-cubes mr-1"></i> Plans List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%">
+            <table class="table table-striped table-hovered w-100" data-remove="{{ route('plans.delete-all') }}">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:20px">#</th>
                         <th>Title</th>
                         <th>Price (Monthly)</th>
                         <th>Price (Yearly)</th>
@@ -53,10 +54,17 @@
                 <tbody>
                     @foreach ($plans as $plan)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $plan->id }}" name="plan_ids[]"
+                                        class="form-check-input checkbox-item" id="plan-{{ $plan->id }}">
+                                    <label for="plan-{{ $plan->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $plan->id }}</td>
                             <td>{{ $plan->title }}</td>
-                            <td>{{ $plan->price_monthly.".00" }}</td>
-                            <td>{{ $plan->price_yearly.".00" }}</td>
+                            <td>{{ $plan->price_monthly . '.00' }}</td>
+                            <td>{{ $plan->price_yearly . '.00' }}</td>
                             <td>{{ $plan->type }}</td>
                             <td>{{ $plan->word_limit }}</td>
                             <td>{{ $plan->image_limit }}</td>
@@ -83,4 +91,7 @@
 
     <!-- Modal Remove plan -->
     @include('admin.modals.remove-item')
+
+    <!-- Modal Remove slected Rows -->
+    @include('admin.modals.remove-all')
 @endsection

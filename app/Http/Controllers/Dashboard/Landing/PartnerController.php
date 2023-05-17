@@ -76,6 +76,23 @@ class PartnerController extends Controller
         return redirect_with_flash("msgSuccess", "Partner deleted successfully", "customize/partners");
     }
 
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $partners_ids = json_decode(request()->ids, true);
+
+        if (count($partners_ids) > 0) {
+            $partners = Partner::whereIn("id", $partners_ids);
+            $partners->delete();
+
+            return redirect_with_flash("msgSuccess", "Partners removed successfully", "customize/partners");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "customize/partners");
+    }
+
     // store partner image
     public function update_logo($partner)
     {

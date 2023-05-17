@@ -36,13 +36,21 @@ Route::group(["middleware" => ["web", "auth", 'role:Admin']], function () {
     Route::get("/question/delete-all", [QuestionController::class, "delete_all"])->name('questions.delete-all');
 
     Route::resource('tones', ToneController::class);
+    Route::get("/tone/delete-all", [ToneController::class, "delete_all"])->name('tones.delete-all');
+
     Route::resource('engines', EngineController::class);
+    Route::get("/engine/delete-all", [EngineController::class, "delete_all"])->name('engines.delete-all');
+
     Route::resource('languages', LanguageController::class);
+    Route::get("/language/delete-all", [LanguageController::class, "delete_all"])->name('languages.delete-all');
+
     Route::resource('prompts', PromptController::class);
+    Route::get("/prompt/delete-all", [PromptController::class, "delete_all"])->name('prompts.delete-all');
 
 
     // subscriptions
     Route::resource("subscriptions/plans", PlanController::class);
+    Route::get("subscriptions/plan/delete-all", [PlanController::class, "delete_all"])->name('plans.delete-all');
 
     // settings
     Route::get("settings/brand", [SettingController::class, "brand_show"])->name('settings.brand_show');
@@ -72,7 +80,10 @@ Route::group(["middleware" => ["web", "auth", 'role:Admin']], function () {
     Route::put('customize/testimonial', [DesignController::class, "testimonial_update"])->name('customize.testimonial_update');
 
     Route::resource("customize/partners", PartnerController::class);
+    Route::get("customize/partner/delete-all", [PartnerController::class, "delete_all"])->name('partners.delete-all');
+    
     Route::resource("customize/blocks", BlockController::class);
+    Route::get("customize/block/delete-all", [BlockController::class, "delete_all"])->name('blocks.delete-all');
 
     // users
     Route::resource('users', UserController::class);

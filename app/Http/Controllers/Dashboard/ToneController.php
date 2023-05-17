@@ -39,7 +39,7 @@ class ToneController extends Controller
      */
     public function show(Tone $tone)
     {
-        return view("admin.pages.tones.show",compact("tone"));
+        return view("admin.pages.tones.show", compact("tone"));
     }
 
     /**
@@ -66,5 +66,22 @@ class ToneController extends Controller
     {
         $tone->delete();
         return redirect_with_flash("msgSuccess", "Tone deleted successfully", "tones");
+    }
+
+    /**
+     * Remove all specified resource from storage.
+     */
+    public function delete_all()
+    {
+        $tones_ids = json_decode(request()->ids, true);
+
+        if (count($tones_ids) > 0) {
+            $tones = Tone::whereIn("id", $tones_ids);
+            $tones->delete();
+
+            return redirect_with_flash("msgSuccess", "Tones removed successfully", "tones");
+        }
+
+        return redirect_with_flash("msgDanger", "Please Select row to delete", "tones");
     }
 }

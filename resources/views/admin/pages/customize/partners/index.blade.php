@@ -37,10 +37,11 @@
             <h3 class="card-title"><i class="fas fa-users mr-1"></i> Partners List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%">
+            <table class="table table-striped table-hovered w-100" data-remove="{{ route('partners.delete-all') }}">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:20px">#</th>
                         <th>Title</th>
                         <th>Logo</th>
                         <th style="width:120px">Actions</th>
@@ -49,10 +50,18 @@
                 <tbody>
                     @foreach ($partners as $partner)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $partner->id }}" name="partner_ids[]"
+                                        class="form-check-input checkbox-item" id="partner-{{ $partner->id }}">
+                                    <label for="partner-{{ $partner->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $partner->id }}</td>
                             <td>{{ $partner->title }}</td>
                             <td>
-                                <img src="{{ $partner->partner_logo }}" alt="{{ $partner->title }}" class="img-thumbnail" style="width:60px;height:60px">
+                                <img src="{{ $partner->partner_logo }}" alt="{{ $partner->title }}" class="img-thumbnail"
+                                    style="width:60px;height:60px">
                             </td>
                             <td>
                                 <a href="{{ route('partners.edit', $partner->id) }}" class="btn btn-warning btn-sm"
@@ -73,4 +82,7 @@
 
     <!-- Modal Remove Partner -->
     @include('admin.modals.remove-item')
+
+    <!-- Modal Remove slected Rows -->
+    @include('admin.modals.remove-all')
 @endsection

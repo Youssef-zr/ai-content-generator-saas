@@ -37,10 +37,11 @@
             <h3 class="card-title"><i class="fas fa-pencil-ruler mr-1"></i> Engines List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%">
+            <table class="table table-striped table-hovered w-100" data-remove="{{ route('engines.delete-all') }}">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:20px">#</th>
                         <th>Title</th>
                         <th>Value</th>
                         <th style="width:120px">Actions</th>
@@ -49,6 +50,13 @@
                 <tbody>
                     @foreach ($engines as $engine)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $engine->id }}" name="engine_ids[]"
+                                        class="form-check-input checkbox-item" id="engine-{{ $engine->id }}">
+                                    <label for="engine-{{ $engine->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $engine->id }}</td>
                             <td>{{ $engine->title }}</td>
                             <td>{{ $engine->value }}</td>
@@ -75,4 +83,7 @@
 
     <!-- Modal Remove Engine -->
     @include('admin.modals.remove-item')
+    
+    <!-- Modal Remove slected Rows -->
+    @include('admin.modals.remove-all')
 @endsection

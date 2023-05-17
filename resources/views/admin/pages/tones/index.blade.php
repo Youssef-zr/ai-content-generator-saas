@@ -37,10 +37,11 @@
             <h3 class="card-title"><i class="fas fa-music mr-1"></i> Tones List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%">
+            <table class="table table-striped table-hovered w-100" data-remove="{{ route('tones.delete-all') }}">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:20px">#</th>
                         <th>Tone</th>
                         <th style="width:120px">Actions</th>
                     </tr>
@@ -48,6 +49,13 @@
                 <tbody>
                     @foreach ($tones as $tone)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $tone->id }}" name="tone_ids[]"
+                                        class="form-check-input checkbox-item" id="tone-{{ $tone->id }}">
+                                    <label for="tone-{{ $tone->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $tone->id }}</td>
                             <td>{{ $tone->tone }}</td>
                             <td>
@@ -55,8 +63,8 @@
                                     title="show information" data-toggle="tooltip">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="{{ route('tones.edit', $tone->id) }}" class="btn btn-warning btn-sm"
-                                    title="edit" data-toggle="tooltip">
+                                <a href="{{ route('tones.edit', $tone->id) }}" class="btn btn-warning btn-sm" title="edit"
+                                    data-toggle="tooltip">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
@@ -73,4 +81,7 @@
 
     <!-- Modal Remove tone -->
     @include('admin.modals.remove-item')
+
+    <!-- Modal Remove slected Rows -->
+    @include('admin.modals.remove-all')
 @endsection

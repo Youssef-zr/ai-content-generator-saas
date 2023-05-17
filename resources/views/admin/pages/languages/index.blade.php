@@ -37,10 +37,11 @@
             <h3 class="card-title"><i class="fa fa-globe mr-1"></i> languages List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered" style="width:100%">
+            <table class="table table-striped table-hovered w-100" data-remove="{{ route('languages.delete-all') }}">
                 <thead>
                     <tr>
-                        <th style="width:70px">#</th>
+                        <th style="width:5px"></th>
+                        <th style="width:20px">#</th>
                         <th>Title</th>
                         <th style="width:180px">Actions</th>
                     </tr>
@@ -48,6 +49,13 @@
                 <tbody>
                     @foreach ($languages as $language)
                         <tr>
+                            <td>
+                                <div class="icheck-maroon">
+                                    <input type="checkbox" value="{{ $language->id }}" name="language_ids[]"
+                                        class="form-check-input checkbox-item" id="language-{{ $language->id }}">
+                                    <label for="language-{{ $language->id }}"></label>
+                                </div>
+                            </td>
                             <td>{{ $language->id }}</td>
                             <td>{{ $language->language }}</td>
                             <td>
@@ -69,4 +77,7 @@
 
     <!-- Modal Remove language -->
     @include('admin.modals.remove-item')
+
+    <!-- Modal Remove slected Rows -->
+    @include('admin.modals.remove-all')
 @endsection
