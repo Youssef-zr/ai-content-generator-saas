@@ -173,7 +173,7 @@
                                 @endif
                             </div>
                             <div class="col-md-3 col-lg-2">
-                                <button class="remove-question btn btn-danger d-none">
+                                <button class="remove-question btn btn-danger btn-sm mt-1 d-none">
                                     <i class="fa fa-times"></i>
                                     Delete
                                 </button>
@@ -226,7 +226,7 @@
 
                 btnRemoveQuestion.removeClass('d-none');
                 btnRemoveQuestion.first().addClass('d-none');
-                
+
                 $('.question-item').last().find('select').val('');
             });
 

@@ -28,7 +28,7 @@ return [
             "plan" => 'c,r,u,d',
             "subscription" => 'c,r,u,d',
             "payment" => 'c,r,u,d',
-        ]
+        ],
     ],
     "create_users" => [
         "admin"

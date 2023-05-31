@@ -73,6 +73,13 @@ class LaratrustSeeder extends Seeder
                 $user->addRole($role);
             }
         }
+
+        // create role user
+        \App\Models\Role::firstOrCreate([
+            'name' => "User",
+            'display_name' => 'user',
+            'description' => "user role",
+        ]);
     }
 
     /**

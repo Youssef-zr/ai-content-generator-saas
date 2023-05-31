@@ -25,13 +25,11 @@
     {{ Html::style('https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css') }}
     {{ Html::style('https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css') }}
     {{ Html::style('https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css') }}
-
-    <!-- dashboard stylesheet  -->
-    {{ Html::style('css/dashboard.css') }}
-
     <!-- custom stylesheet  -->
     @stack('css')
 
+    <!-- dashboard stylesheet  -->
+    {{ Html::style('css/dashboard.css') }}
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

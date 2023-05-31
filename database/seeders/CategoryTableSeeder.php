@@ -22,7 +22,6 @@ class CategoryTableSeeder extends Seeder
             "Brainstorming tools",
             "Digital Ad copy",
             "Social media tools",
-            "Social media tools",
             "E-Commerce",
             "Blog tools",
         ];

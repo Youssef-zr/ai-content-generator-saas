@@ -22,8 +22,8 @@ return new class extends Migration
             $table->foreign('engine_id')->references('id')->on('engines')->onDelete('cascade');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->unsignedBigInteger('tone_id');
-            $table->foreign('tone_id')->references('id')->on('tones')->onDelete('cascade');
+            $table->unsignedBigInteger('tone_id')->nullable();
+            $table->foreign('tone_id')->references('id')->on('tones')->onDelete('Set Null');
             $table->json('questions');
             $table->timestamps();
         });

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             LandingPageTableSeeder::class,
             PartnerTableSeeder::class,
             BlockTableSeeder::class,
+            UserTableSeeder::class,
         ]);
     }
 }

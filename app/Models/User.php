@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Front\Settings;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,5 +51,11 @@ class User extends Authenticatable  implements LaratrustUser
         }
 
         return url($this->image);
+    }
+
+    // get user settings
+    public function settings()
+    {
+        return $this->hasOne(Settings::class, 'user_id', 'id');
     }
 }

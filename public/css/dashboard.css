@@ -102,6 +102,9 @@ table tbody tr > td:nth-of-type(2) {
     padding-left: 0px;
     padding-right: 0px;
 }
+.form-group{
+    margin-bottom: 10px;
+}
 .form-group,
 .form-group .form-control::placeholder {
     text-transform: capitalize;
@@ -110,11 +113,26 @@ table tbody tr > td:nth-of-type(2) {
     content: " *";
     color: red;
 }
-
 .form-check.is-invalid ~ .invalid-feedback {
     display: block;
 }
-
+.form-control.error {
+    border-color: rgb(221, 17, 47);
+}
+.form-control.error + label {
+    color: rgb(221, 17, 47);
+    font-weight: 600;
+    font-size: 14px;
+}
+.form-control.valid {
+    border-color: rgb(7, 201, 152);
+}
+.form-control.valid + label {
+    color: rgb(7, 201, 152);
+}
+.form-group:has(.form-control.error) {
+    margin-bottom: 0;
+}
 .dataTables_length label select {
     width: 65px !important;
     font-size: 15px;
@@ -152,6 +170,11 @@ div.dt-button-collection {
     margin-bottom: 20px;
 }
 
+.form-label {
+    font-weight: 600 !important;
+    color:#333;
+    font-size: 15px;
+}
 .has-error .form-label,
 .has-error .form-controll,
 .has-error .help-block {
@@ -165,6 +188,10 @@ div.dt-button-collection {
 }
 .has-error .help-block strong {
     font-size: 14px;
+}
+.help-block {
+    text-transform: lowercase;
+    color: #333;
 }
 .has-error .tree {
     border: 1px solid #dc3545 !important;
@@ -216,7 +243,11 @@ div.dt-button-collection {
     right: -18px;
     font-size: 30px;
 }
-
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover
+{
+    background-color: rgba(255,255,255,.1);
+    color: #eee;
+}
 /* start custom input file */
 .js .inputfile {
     width: 0.1px;
@@ -277,3 +308,7 @@ div.dt-button-collection {
 }
 
 /* end custom input file */
+
+.note-editor p{
+    font-size: 17px;
+}

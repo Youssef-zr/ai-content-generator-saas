@@ -1,22 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\EngineController;
-use App\Http\Controllers\Dashboard\Landing\BlockController;
-use App\Http\Controllers\Dashboard\Landing\DesignController;
-use App\Http\Controllers\Dashboard\Landing\PartnerController;
-use App\Http\Controllers\Dashboard\LanguageController;
-use App\Http\Controllers\Dashboard\PlanController;
-use App\Http\Controllers\Dashboard\PromptController;
-use App\Http\Controllers\Dashboard\QuestionController;
-use App\Http\Controllers\Dashboard\SettingController;
-use App\Http\Controllers\Dashboard\ToneController;
-use App\Http\Controllers\Dashboard\User\PermissionController;
-use App\Http\Controllers\Dashboard\User\ProfileController;
-use App\Http\Controllers\Dashboard\User\RoleController;
-use App\Http\Controllers\Dashboard\User\UserController;
+use App\Http\Controllers\Dashboard\{
+    LanguageController,
+    PlanController,
+    PromptController,
+    QuestionController,
+    SettingController,
+    ToneController,
+    CategoryController,
+    DashboardController,
+    EngineController,
+};
+use App\Http\Controllers\Dashboard\User\{
+    PermissionController,
+    ProfileController,
+    RoleController,
+    UserController,
+};
+use App\Http\Controllers\Dashboard\Landing\{
+    DesignController,
+    BlockController,
+    PartnerController,
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -81,7 +87,7 @@ Route::group(["middleware" => ["web", "auth", 'role:Admin']], function () {
 
     Route::resource("customize/partners", PartnerController::class);
     Route::get("customize/partner/delete-all", [PartnerController::class, "delete_all"])->name('partners.delete-all');
-    
+
     Route::resource("customize/blocks", BlockController::class);
     Route::get("customize/block/delete-all", [BlockController::class, "delete_all"])->name('blocks.delete-all');
 

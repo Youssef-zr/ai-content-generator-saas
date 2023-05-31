@@ -78,7 +78,7 @@
                 <!-- languages -->
                 <li class="nav-item">
                     <a href="{{ route('languages.index') }}" class="nav-link {{ activeSideLink('languages') }}">
-                        <i class="nav-icon fa fa-question-circle-o"></i>
+                        <i class="nav-icon fa fa-globe"></i>
                         <p>
                             Languages
                         </p>

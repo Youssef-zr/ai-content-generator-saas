@@ -81,7 +81,7 @@ class PromptController extends Controller
         $prompt->delete();
         return redirect_with_flash("msgSuccess", "Prompt deleted successfully", "prompts");
     }
-    
+
     /**
      * Remove all specified resource from storage.
      */
@@ -104,7 +104,7 @@ class PromptController extends Controller
     {
         $tabledata = [];
         if ($table_name == "engines") {
-            $tabledata = Engine::pluck("value", "id")->toArray();
+            $tabledata = Engine::orderBy("id","desc")->pluck("value", "id")->toArray();
         } else if ($table_name == "categories") {
             $tabledata = Category::pluck("title", "id")->toArray();
         } else if ($table_name == "tones") {

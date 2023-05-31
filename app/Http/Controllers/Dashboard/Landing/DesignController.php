@@ -38,7 +38,7 @@ class DesignController extends Controller
         return view('admin.pages.customize.sections.landing-page', compact("lp", "partners"));
     }
 
-    // landing page udate
+    // landing page update
     public function landing_page_update(LandingPageRequest $request)
     {
         $lp = $this->landingPage;

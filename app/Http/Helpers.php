@@ -14,12 +14,24 @@ if (!function_exists('adminUrl')) {
     }
 }
 
+// the request shurthund of user resource
+if (!function_exists('userUrl')) {
+    function userUrl($url = null)
+    {
+        if (env('APP_ENV') == "production") {
+            return secure_url('/user/' . $url);
+        } else {
+            return url('/user/' . $url);
+        }
+    }
+}
+
 // redirect with flash msg
 if (!function_exists('redirect_with_flash')) {
     function redirect_with_flash($alerType, $msg, $redirectTo, $admin = "")
     {
         request()->session()->flash($alerType, $msg);
-        $url = $admin == "" ? adminUrl($redirectTo) : url($redirectTo);
+        $url = $admin == "" ? adminUrl($redirectTo) : userUrl($redirectTo);
         return redirect($url);
     }
 }
@@ -97,6 +109,16 @@ if (!function_exists('setActive')) {
 
         $contains = Str::contains($currentUrl, $path);
         return $contains ? $active : "";
+    }
+}
+
+if (!function_exists('setActiveFront')) {
+    function setActiveFront($path, $active = 'text-primary')
+    {
+        $currentUrl = request()->server("REQUEST_URI");
+        $contains = strcmp($currentUrl, $path);
+
+        return !$contains ? $active : "";
     }
 }
 

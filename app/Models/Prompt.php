@@ -18,8 +18,28 @@ class Prompt extends Model
         return $this->hasOne(category::class, 'id', 'category_id');
     }
 
+    public function engine()
+    {
+        return $this->hasOne(Engine::class, 'id', 'engine_id');
+    }
+
+    public function languge()
+    {
+        return $this->hasOne(Language::class, 'id', 'language_id');
+    }
+
+    public function tone()
+    {
+        return $this->hasOne(Tone::class, 'id', 'tone_id');
+    }
+
     public function prompet_question($question_id)
     {
         return Question::where('id', $question_id)->first();
+    }
+
+    public function questions($question_ids)
+    {
+        return Question::whereIn("id", $question_ids)->get();
     }
 }

@@ -12,6 +12,21 @@ class Setting extends Model
     protected $guarded = ["siteLogo","siteFavicon"];
 
 
+    public function engine()
+    {
+        return $this->hasOne(Engine::class, 'id', 'engine_id');
+    }
+
+    public function tone()
+    {
+        return $this->hasOne(Tone::class, 'id', 'tone_id');
+    }
+
+    public function languge()
+    {
+        return $this->hasOne(Language::class, 'id', 'language_id');
+    }
+
     public function getSiteLogoAttribute()
     {
         $image = $this->logo;

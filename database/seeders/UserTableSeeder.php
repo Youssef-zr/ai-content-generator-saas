@@ -2,13 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Front\Settings;
+use App\Models\Language;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use App\Models\{
-    Role,
-    User
-};
-
+use App\Models\User;
 
 class UserTableSeeder extends Seeder
 {
@@ -18,13 +16,27 @@ class UserTableSeeder extends Seeder
     public function run(): void
     {
         $admin = new User();
-        $admin->name = "youssef";
+        $admin->name = "admin";
         $admin->email = "yn-neinaa@hotmail.com";
         $admin->password = Hash::make('123456');
-
         $admin->save();
 
-        $adminRole = Role::where('name', "=", "admin")->select("id")->first();
-        $admin->addRole($adminRole);
+        $admin->addRole(1);
+
+        // -------------------------------------------------------------------
+
+        $user = new User();
+        $user->name = "user";
+        $user->email = "user@app.com";
+        $user->password = Hash::make('123456');
+        $user->save();
+
+        $user->addRole(2);
+
+        $enLang = Language::where('language', "english")->first()->id;
+        Settings::create([
+            'user_id' => $user->id,
+            "language_id" => $enLang,
+        ]);
     }
 }
