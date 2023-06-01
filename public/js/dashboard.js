@@ -203,7 +203,7 @@ $(() => {
             $("#remove-all-rows").modal("show");
         }
     });
-    
+
     // remove all selected rows
     $(".confirm-delete-all").on("click", function () {
         let dt_rows_checked = $(".checkbox-item:checked");
@@ -218,5 +218,15 @@ $(() => {
             )}`;
             window.location = url;
         }
+    });
+
+    // nav container click close
+    let $sideLinks = $(".nav-container");
+    $(".nav-container").on("click", function () {
+        $(this)
+            .addClass("menu-is-opening menu-open")
+            .find(".nav-treeview")
+            .css("display", "block");
+        $sideLinks.removeClass("menu-is-opening menu-open");
     });
 });

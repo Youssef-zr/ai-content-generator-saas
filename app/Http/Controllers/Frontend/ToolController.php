@@ -14,7 +14,6 @@ use App\Models\{
     Tone,
 };
 
-
 class ToolController extends Controller
 {
     public function history()

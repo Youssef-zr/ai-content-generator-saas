@@ -70,14 +70,14 @@ trait UploadFiles
     }
 
     // store new file base64
-    public static function storeFileBase64($file, $storagePath, $customName = "")
+    public static function storeFileBase64($imgProp, $customName = "")
     {
-        $image_parts = explode(";base64,", $file);
+        $image_parts = explode(";base64,", $imgProp['file']);
         $image_type = explode("image/", $image_parts[0])[1];
         $image_base64 = base64_decode($image_parts[1]);
-        $file_name = $customName != "" ? $customName : uniqid();
+        $file_name = $customName != "" ? $imgProp['customName'] : uniqid();
         $file_name = $file_name . '.' . $image_type;
-        $path = $storagePath . $file_name;
+        $path = $imgProp['storagePath'] . $file_name;
 
         file_put_contents(public_path($path), $image_base64);
 
@@ -91,11 +91,11 @@ trait UploadFiles
     }
 
     // update existing file base64
-    public static function updateFileBase64($file, $storagePath, $oldFilePath, $customName = "")
+    public static function updateFileBase64($imgProp)
     {
-        UploadFiles::removeFile($oldFilePath);
+        UploadFiles::removeFile($imgProp);
 
-        return UploadFiles::storeFileBase64($file, $storagePath, $customName);
+        return UploadFiles::storeFileBase64($imgProp);
     }
 
     // convert image to base 64

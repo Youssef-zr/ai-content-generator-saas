@@ -20,7 +20,7 @@ class SettingsTableSeeder extends Seeder
             'adress' => 'mimousas kenitra',
             'phone' => '+212762927783',
             'version' => '1.0.0',
-            'openai_api_key' => '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',
+            'openai_api_key' => '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',
             'default_max_tokens' => 3000,
             'engine_id' => 7,
             'language_id' => 2,
