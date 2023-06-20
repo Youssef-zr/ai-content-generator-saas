@@ -25,12 +25,14 @@
 
 <!-- content -->
 @section('content')
-    <div class="new-row mb-2">
-        <a href="{{ route('categories.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-            New Category
-        </a>
-    </div>
+    @permission('create_category')
+        <div class="new-row mb-2">
+            <a href="{{ route('categories.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                New Category
+            </a>
+        </div>
+    @endpermission
 
     <div class="card card-primary">
         <div class="card-header ">
@@ -43,7 +45,9 @@
                         <th style="width:5px"></th>
                         <th style="width:20px">#</th>
                         <th>Title</th>
-                        <th style="width:180px">Actions</th>
+                        @permission(['update_category', 'delete_category'])
+                            <th style="width:180px">Actions</th>
+                        @endpermission
                     </tr>
                 </thead>
                 <tbody>
@@ -58,16 +62,25 @@
                             </td>
                             <td>{{ $category->id }}</td>
                             <td>{{ $category->title }}</td>
-                            <td>
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm"
-                                    title="edit" data-toggle="tooltip">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('categories.destroy', $category->id) }}">
-                                    <i class="fa fa-trash" title="delete" data-toggle="tooltip"></i>
-                                </button>
-                            </td>
+                            
+                            @permission(['update_category', 'delete_category'])
+                                <td>
+                                    @permission('update_category')
+                                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning btn-sm"
+                                            title="edit" data-toggle="tooltip">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('delete_category')
+                                        <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
+                                            data-target="#removeItem" data-url="{{ route('categories.destroy', $category->id) }}">
+                                            <i class="fa fa-trash" title="delete" data-toggle="tooltip"></i>
+                                        </button>
+                                    @endpermission
+                                </td>
+                            @endpermission
+
                         </tr>
                     @endforeach
                 </tbody>

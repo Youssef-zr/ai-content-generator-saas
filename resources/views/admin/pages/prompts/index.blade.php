@@ -25,12 +25,14 @@
 
 <!-- content -->
 @section('content')
-    <div class="new-row mb-2">
-        <a href="{{ route('prompts.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-            New Prompt
-        </a>
-    </div>
+    @permission('create_prompt')
+        <div class="new-row mb-2">
+            <a href="{{ route('prompts.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                New Prompt
+            </a>
+        </div>
+    @endpermission
 
     <div class="card card-primary">
         <div class="card-header ">
@@ -47,7 +49,9 @@
                         <th>Max Tokens</th>
                         <th>Category</th>
                         <th>Questions</th>
-                        <th style="width:140px">Actions</th>
+                        @permission(['update_prompt', 'delete_prompt'])
+                            <th style="width:140px">Actions</th>
+                        @endpermission
                     </tr>
                 </thead>
                 <tbody>
@@ -72,16 +76,25 @@
                                     </span>
                                 @endforeach
                             </td>
-                            <td>
-                                <a href="{{ route('prompts.edit', $prompt->id) }}" class="btn btn-warning btn-sm"
-                                    title="edit" data-toggle="tooltip">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('prompts.destroy', $prompt->id) }}">
-                                    <i class="fa fa-trash" title="delete" data-toggle="tooltip"></i>
-                                </button>
-                            </td>
+
+                            @permission(['update_prompt', 'delete_prompt'])
+                                <td>
+                                    @permission('update_prompt')
+                                        <a href="{{ route('prompts.edit', $prompt->id) }}" class="btn btn-warning btn-sm"
+                                            title="edit" data-toggle="tooltip">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('delete_prompt')
+                                        <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
+                                            data-target="#removeItem" data-url="{{ route('prompts.destroy', $prompt->id) }}">
+                                            <i class="fa fa-trash" title="delete" data-toggle="tooltip"></i>
+                                        </button>
+                                    @endpermission
+                                </td>
+                            @endpermission
+
                         </tr>
                     @endforeach
                 </tbody>

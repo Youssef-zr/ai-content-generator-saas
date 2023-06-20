@@ -1,7 +1,7 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'Fiverr Sass',
+    'name' => 'chatGpt Sass',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost',
@@ -245,7 +245,7 @@
         'driver' => 'octane',
       ),
     ),
-    'prefix' => 'fiverr_sass_cache_',
+    'prefix' => 'chatgpt_sass_cache_',
   ),
   'cors' => 
   array (
@@ -344,7 +344,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'fiverr_sass_database_',
+        'prefix' => 'chatgpt_sass_database_',
       ),
       'default' => 
       array (
@@ -421,6 +421,99 @@
   array (
     'driver' => 'gd',
   ),
+  'laratrust' => 
+  array (
+    'use_morph_map' => false,
+    'checkers' => 
+    array (
+      'user' => 'default',
+      'role' => 'default',
+    ),
+    'cache' => 
+    array (
+      'enabled' => false,
+      'expiration_time' => 3600,
+    ),
+    'user_models' => 
+    array (
+      'users' => 'App\\Models\\User',
+    ),
+    'models' => 
+    array (
+      'role' => 'App\\Models\\Role',
+      'permission' => 'App\\Models\\Permission',
+      'team' => 'App\\Models\\Team',
+    ),
+    'tables' => 
+    array (
+      'roles' => 'roles',
+      'permissions' => 'permissions',
+      'teams' => 'teams',
+      'role_user' => 'role_user',
+      'permission_user' => 'permission_user',
+      'permission_role' => 'permission_role',
+    ),
+    'foreign_keys' => 
+    array (
+      'user' => 'user_id',
+      'role' => 'role_id',
+      'permission' => 'permission_id',
+      'team' => 'team_id',
+    ),
+    'middleware' => 
+    array (
+      'register' => true,
+      'handling' => 'abort',
+      'handlers' => 
+      array (
+        'abort' => 
+        array (
+          'code' => 403,
+          'message' => 'User does not have any of the necessary access rights.',
+        ),
+        'redirect' => 
+        array (
+          'url' => '/home',
+          'message' => 
+          array (
+            'key' => 'error',
+            'content' => '',
+          ),
+        ),
+      ),
+    ),
+    'teams' => 
+    array (
+      'enabled' => false,
+      'strict_check' => false,
+    ),
+    'permissions_as_gates' => false,
+    'panel' => 
+    array (
+      'register' => false,
+      'domain' => NULL,
+      'path' => 'laratrust',
+      'go_back_route' => '/',
+      'middleware' => 
+      array (
+        0 => 'web',
+      ),
+      'assign_permissions_to_user' => true,
+      'create_permissions' => true,
+      'roles_restrictions' => 
+      array (
+        'not_removable' => 
+        array (
+        ),
+        'not_editable' => 
+        array (
+        ),
+        'not_deletable' => 
+        array (
+        ),
+      ),
+    ),
+  ),
   'laratrust_seeder' => 
   array (
     'create_users' => 
@@ -432,23 +525,38 @@
     array (
       'Admin' => 
       array (
-        'user' => 'c,r,u,d',
-        'payment' => 'c,r,u,d',
+        'dashboard' => 'a',
+        'category' => 'a,c,r,u,d',
+        'question' => 'a,c,r,u,d',
+        'tone' => 'a,c,r,u,d',
+        'engine' => 'a,c,r,u,d',
+        'language' => 'a,c,r,u,d',
+        'prompt' => 'a,c,r,u,d',
+        'subscription_management' => 'a',
+        'subscription' => 'a,c,r,u,d',
+        'plan' => 'a,c,r,u,d',
+        'settings' => 'a',
+        'brand' => 'a,u',
+        'third_party' => 'a,u',
+        'content' => 'a,u',
+        'customize' => 'a',
+        'landing_page' => 'a,u',
+        'hero' => 'a,u',
+        'partner' => 'a,c,r,u,d',
+        'story' => 'a,u',
+        'block' => 'a,c,r,u,d',
+        'pricing' => 'a,u',
+        'testimonial' => 'a,u',
+        'user' => 'a,c,r,u,d',
         'profile' => 'r,u',
-        'permission' => 'c,r,u,d',
-        'role' => 'c,r,u,d',
-        'question' => 'c,r,u,d',
-        'content' => 'c,r,u,d',
-        'tone' => 'c,r,u,d',
-        'answer' => 'c,r,u,d',
-        'audit_log' => 'c,r,u,d',
-        'currencie' => 'c,r,u,d',
-        'plan' => 'c,r,u,d',
-        'subscription' => 'c,r,u,d',
+        'permission' => 'a,c,r,u,d',
+        'role' => 'a,c,r,u,d',
+        'audit_log' => 'a,c,r,u,d',
       ),
     ),
     'permissions_map' => 
     array (
+      'a' => 'access',
       'c' => 'create',
       'r' => 'read',
       'u' => 'update',
@@ -608,7 +716,7 @@
     'from' => 
     array (
       'address' => 'hello@example.com',
-      'name' => 'Fiverr Sass',
+      'name' => 'chatGpt Sass',
     ),
     'markdown' => 
     array (
@@ -621,7 +729,7 @@
   ),
   'openai' => 
   array (
-    'api_key' => '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',
+    'api_key' => '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',
     'organization' => NULL,
   ),
   'queue' => 
@@ -740,7 +848,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'fiverr_sass_session',
+    'cookie' => 'chatgpt_sass_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,
@@ -754,99 +862,6 @@
       0 => 'C:\\laragon\\www\\fiverr-sass\\resources\\views',
     ),
     'compiled' => 'C:\\laragon\\www\\fiverr-sass\\storage\\framework\\views',
-  ),
-  'laratrust' => 
-  array (
-    'use_morph_map' => false,
-    'checkers' => 
-    array (
-      'user' => 'default',
-      'role' => 'default',
-    ),
-    'cache' => 
-    array (
-      'enabled' => false,
-      'expiration_time' => 3600,
-    ),
-    'user_models' => 
-    array (
-      'users' => 'App\\Models\\User',
-    ),
-    'models' => 
-    array (
-      'role' => 'App\\Models\\Role',
-      'permission' => 'App\\Models\\Permission',
-      'team' => 'App\\Models\\Team',
-    ),
-    'tables' => 
-    array (
-      'roles' => 'roles',
-      'permissions' => 'permissions',
-      'teams' => 'teams',
-      'role_user' => 'role_user',
-      'permission_user' => 'permission_user',
-      'permission_role' => 'permission_role',
-    ),
-    'foreign_keys' => 
-    array (
-      'user' => 'user_id',
-      'role' => 'role_id',
-      'permission' => 'permission_id',
-      'team' => 'team_id',
-    ),
-    'middleware' => 
-    array (
-      'register' => true,
-      'handling' => 'abort',
-      'handlers' => 
-      array (
-        'abort' => 
-        array (
-          'code' => 403,
-          'message' => 'User does not have any of the necessary access rights.',
-        ),
-        'redirect' => 
-        array (
-          'url' => '/home',
-          'message' => 
-          array (
-            'key' => 'error',
-            'content' => '',
-          ),
-        ),
-      ),
-    ),
-    'teams' => 
-    array (
-      'enabled' => false,
-      'strict_check' => false,
-    ),
-    'permissions_as_gates' => false,
-    'panel' => 
-    array (
-      'register' => false,
-      'domain' => NULL,
-      'path' => 'laratrust',
-      'go_back_route' => '/',
-      'middleware' => 
-      array (
-        0 => 'web',
-      ),
-      'assign_permissions_to_user' => true,
-      'create_permissions' => true,
-      'roles_restrictions' => 
-      array (
-        'not_removable' => 
-        array (
-        ),
-        'not_editable' => 
-        array (
-        ),
-        'not_deletable' => 
-        array (
-        ),
-      ),
-    ),
   ),
   'flare' => 
   array (

@@ -10,17 +10,18 @@ use App\Http\Requests\User\{
 };
 use Illuminate\Support\Facades\{
     Auth,
-    Hash,
+    Hash
 };
 
 class ProfileController extends Controller
 {
     use UploadFiles;
+
     // show user profile information
     public function show_profile()
     {
         $auth_user = Auth::user();
-        return view("admin.pages.users.user.profile", compact("auth_user"));
+        return view("frontend.pages.user.profile", compact("auth_user"));
     }
 
     // update user profile information
@@ -32,7 +33,7 @@ class ProfileController extends Controller
 
         $this->update_user_avatar($user);
 
-        return redirect_with_flash("msgSuccess", "Your Information Was Updated Successfully", 'profile');
+        return redirect_with_flash("msgSuccess", "Your Information Was Updated Successfully", 'profile', 'false');
     }
 
     // update user password
@@ -44,14 +45,13 @@ class ProfileController extends Controller
             "password" => $password
         ])->save();
 
-        return redirect_with_flash("msgSuccess", "Your Password Was Updated Successfully", 'profile');
+        return redirect_with_flash("msgSuccess", "Your Password Was Updated Successfully", 'profile', "false");
     }
 
     // log out
     public function logout()
     {
         Auth::logout();
-
         return redirect(url('login'));
     }
 
@@ -66,13 +66,9 @@ class ProfileController extends Controller
             $default = $oldFile;
 
             $imgProp = [
-                'file' => $photo,
-                "storagePath" => $storagePath,
-                "old_image" => $oldFile,
-                "default" => $default,
-                "width" => 90,
-                "height" => 90,
-                "quality" => 96
+                'file' => $photo, "storagePath" => $storagePath,
+                "old_image" => $oldFile, "default" => $default,
+                "width" => 90, "height" => 90, "quality" => 96
             ];
 
             $fileInformation = UploadFiles::updateFile($imgProp);

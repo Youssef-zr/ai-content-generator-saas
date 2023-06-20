@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Dashboard\{
+use App\Http\Controllers\Dashboard\Admin\{
     LanguageController,
     PlanController,
     PromptController,
@@ -12,13 +12,13 @@ use App\Http\Controllers\Dashboard\{
     DashboardController,
     EngineController,
 };
-use App\Http\Controllers\Dashboard\User\{
+use App\Http\Controllers\Dashboard\Admin\User\{
     PermissionController,
     ProfileController,
     RoleController,
     UserController,
 };
-use App\Http\Controllers\Dashboard\Landing\{
+use App\Http\Controllers\Dashboard\Admin\Landing\{
     DesignController,
     BlockController,
     PartnerController,

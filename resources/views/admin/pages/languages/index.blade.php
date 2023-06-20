@@ -25,12 +25,14 @@
 
 <!-- content -->
 @section('content')
-    <div class="new-row mb-2">
-        <a href="{{ route('languages.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-            New Language
-        </a>
-    </div>
+    @permission('create_language')
+        <div class="new-row mb-2">
+            <a href="{{ route('languages.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                New Language
+            </a>
+        </div>
+    @endpermission
 
     <div class="card card-primary">
         <div class="card-header ">
@@ -43,7 +45,9 @@
                         <th style="width:5px"></th>
                         <th style="width:20px">#</th>
                         <th>Title</th>
-                        <th style="width:180px">Actions</th>
+                        @permission(['update_language', 'delete_language'])
+                            <th style="width:180px">Actions</th>
+                        @endpermission
                     </tr>
                 </thead>
                 <tbody>
@@ -58,16 +62,25 @@
                             </td>
                             <td>{{ $language->id }}</td>
                             <td>{{ $language->language }}</td>
-                            <td>
-                                <a href="{{ route('languages.edit', $language->id) }}" class="btn btn-warning btn-sm"
-                                    title="edit" data-toggle="tooltip">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('languages.destroy', $language->id) }}">
-                                    <i class="fa fa-trash" title="delete" data-toggle="tooltip"></i>
-                                </button>
-                            </td>
+
+                            @permission(['update_language', 'delete_language'])
+                                <td>
+                                    @permission('update_language')
+                                        <a href="{{ route('languages.edit', $language->id) }}" class="btn btn-warning btn-sm"
+                                            title="edit" data-toggle="tooltip">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('delete_language')
+                                        <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
+                                            data-target="#removeItem" data-url="{{ route('languages.destroy', $language->id) }}">
+                                            <i class="fa fa-trash" title="delete" data-toggle="tooltip"></i>
+                                        </button>
+                                    @endpermission
+                                </td>
+                            @endpermission
+
                         </tr>
                     @endforeach
                 </tbody>

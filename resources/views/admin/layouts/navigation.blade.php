@@ -9,6 +9,15 @@
 
        <!-- Right navbar links -->
        <ul class="navbar-nav ml-auto">
+
+           <!-- Buy Now Link fiverr -->
+           <li class="nav-item ms-md-4 mr-5">
+               <a class="nav-link btn btn-success text-white" target="_blank"
+                   href="https://www.fiverr.com/dev_youssef/create-your-own-ai-blog-writing-social-media-content-email-marketing-using-gpt3">
+                   <img src="{{ url('assets/site/images/fiverr-icon.png') }}" alt=""> Buy Now
+               </a>
+           </li>
+
            <!-- Messages Dropdown Menu -->
            <li class="nav-item dropdown">
                <a class="nav-link" data-toggle="dropdown" href="#">
@@ -25,6 +34,7 @@
                </div>
            </li>
 
+           <!-- Full Screen -->
            <li class="nav-item">
                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                    <i class="fas fa-expand-arrows-alt"></i>

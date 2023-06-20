@@ -25,12 +25,14 @@
 
 <!-- content -->
 @section('content')
-    <div class="new-row mb-2">
-        <a href="{{ route('users.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-            New User
-        </a>
-    </div>
+    @permission('create_user')
+        <div class="new-row mb-2">
+            <a href="{{ route('users.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                New User
+            </a>
+        </div>
+    @endpermission
 
     <div class="card card-primary">
         <div class="card-header ">
@@ -44,7 +46,9 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th style="width:120px">Actions</th>
+                        @permission(['read_user', 'update_user', 'delete_user'])
+                            <th style="width:120px">Actions</th>
+                        @endpermission
                     </tr>
                 </thead>
                 <tbody>
@@ -60,20 +64,32 @@
                                     </label>
                                 @endforeach
                             </td>
-                            <td>
-                                <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary btn-sm"
-                                    title="show information" data-toggle="tooltip">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm" title="edit"
-                                    data-toggle="tooltip">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('users.destroy', $user->id) }}">
-                                    <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
-                                </button>
-                            </td>
+
+                            @permission(['read_user', 'update_user', 'delete_user'])
+                                <td>
+                                    @permission('read_user')
+                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary btn-sm"
+                                            title="show information" data-toggle="tooltip">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('update_user')
+                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm" title="edit"
+                                            data-toggle="tooltip">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('delete_user')
+                                        <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
+                                            data-target="#removeItem" data-url="{{ route('users.destroy', $user->id) }}">
+                                            <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
+                                        </button>
+                                    @endpermission
+                                </td>
+                            @endpermission
+
                         </tr>
                     @endforeach
                 </tbody>

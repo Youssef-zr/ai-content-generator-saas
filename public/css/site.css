@@ -1,0 +1,267 @@
+body {
+    font-family: Roboto, "sans-serif";
+    font-size: 16px;
+    text-transform: capitalize;
+}
+p {
+    font-size: 16px;
+    /* font-weight: 500; */
+}
+
+.text-dark {
+    color: #22325c !important;
+}
+.img-responsive {
+    max-width: 100%;
+}
+.text-underline {
+    text-decoration: underline !important;
+}
+
+/* start swipper style */
+.mySwiper {
+    height: 35px;
+}
+.mySwiper .swiper-wrapper {
+    justify-content: center;
+    align-items: center; /* add this will all relevant prefixes */
+}
+.mySwiper .swiper-slide {
+    height: 100%;
+}
+.mySwiper .swiper-slide img {
+    height: 100%;
+    width: 100%;
+}
+
+/* start navigation style */
+
+.navigation .nav-link {
+    color: #fff !important;
+    font-weight: 400 !important;
+    margin-right: 8px;
+}
+
+/* start hero section */
+.section-hero {
+    margin-top: 20px;
+    padding: 70px 0;
+}
+
+.section-hero .hero-content .hero-title {
+    font-size: 38px;
+    font-weight: 600;
+}
+.section-hero .hero-content .hero-subtitle {
+    color: #333;
+    font-size: 17px;
+}
+.section-hero .hero-content .cta {
+    margin-top: 7px;
+}
+.section-hero .hero-content .cta .cta-info {
+    margin-top: 10px;
+}
+.section-hero .hero-content .cta .cta-info p {
+    font-size: 15px;
+}
+
+/* start section partners */
+.section-partners {
+    margin: 20px 0 40px;
+}
+
+/* start section about */
+.section-about {
+    margin-top: 20px;
+    padding: 70px 0;
+}
+.section-about .about-main-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.section-about .about-main-title .subtitle {
+    color: #222;
+}
+.section-about .blocks-informations {
+    margin-bottom: 20px;
+}
+.section-about .blocks-informations .block-item .block-content p {
+    color: #444;
+}
+.section-about .story-promotion {
+    font-size: 16px;
+    margin: 20px 0 40px;
+}
+
+/* start section pricing */
+.section-pricing{
+    padding:40px 0 20px
+}
+.pricing{
+	margin:40px 0px;
+}
+.pricing .table{
+	border-top:1px solid #ddd;
+	background:#fff;
+}
+.pricing .table th,
+.pricing .table {
+	text-align: center;
+}
+.pricing .table th,
+.pricing .table td {
+	padding: 20px 10px;
+	border:1px solid #ddd;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.pricing .table th {
+	width: 25%;
+	font-size: 21px;
+	font-weight: 400;
+	border-bottom: 0;
+	background:#4b6584;
+	color: #EBEDF3;
+	text-transform: uppercase;
+}
+.pricing .table th.highlight{
+	border-top: 4px solid #4caf50 !important;
+}
+.pricing .table tr:nth-child(odd){
+	background: #f0f8ff;
+}
+.pricing .table td:first-child{
+	padding-left: 20px;
+	text-align: left;
+	padding-top:35px;
+	background: #4b6584;
+}
+.pricing tr td .ptable-title {
+	font-size: 17px;
+	font-weight:600;
+	color: #fff;
+}
+.pricing tr td .ptable-title i {
+	width: 23px;
+	line-height: 25px;
+	text-align: right;
+	margin-right: 5px;
+}
+.pricing .ptable-star {
+	position: relative;
+	display: block;
+	text-align: center;
+}
+.pricing .ptable-star.orange{
+	color: #f0950c;
+}
+.pricing .ptable-star.green{
+	color: #4caf50;
+}
+.pricing .ptable-star.lblue{
+	color: #03a9f4;
+}
+.pricing .ptable-star i {
+	width: 8px;
+	font-size: 13px;
+}
+.pricing .ptable-price {
+	display: block;
+}
+.pricing tr td {
+	font-size: 16px;
+	line-height:32px;
+	text-transform:uppercase;
+}
+.pricing tr td.bg-orange{
+	background: #f0950c;
+}
+.pricing tr td.bg-green{
+	background: #4caf50;
+}
+.pricing tr td.bg-lblue{
+	background: #03a9f4;
+}
+.pricing tr td.bg-orange a,
+.pricing tr td.bg-green a,
+.pricing tr td.bg-lblue a{
+	color: #fff;
+}
+.pricing tr td i {
+	display: block;
+	margin-bottom: 12px;
+	font-size: 30px;
+}
+.pricing tr td i.orange{
+	color: #f0950c;
+}
+.pricing tr td i.green{
+	color: #4caf50;
+}
+.pricing tr td i.lblue{
+	color: #03a9f4;
+}
+.pricing tr td:first-child i{
+	display:inline;
+	margin-bottom:0px;
+	font-size:22px;
+}
+
+
+
+/* start section testimonials */
+.section-testimonials {
+    padding: 20px 0 50px;
+}
+
+.section-testimonials .testimonial-block .testimonial-avatar {
+    margin-bottom: 15px;
+}
+.section-testimonials .testimonial-block .testimonial-review p {
+    color: #333;
+}
+.section-testimonials .testimonial-block .testimonial-client .client-name p {
+    background: #22325c;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 400 !important;
+    margin-bottom: 10px;
+}
+.section-testimonials .testimonial-block .testimonial-client .client-job span {
+    font-size: 15px;
+}
+
+/* start footer section */
+footer.section-footer {
+    margin-top: 60px;
+    background: #212529;
+    padding: 55px 0 0;
+}
+footer.section-footer .site-list-map{
+    margin-bottom: 30px;
+}
+footer.section-footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+}
+footer.section-footer h5{
+    color:#eee
+}
+
+footer.section-footer .copyright-part{
+    text-align: center;
+    padding: 30px 0;
+    border-color: #444 !important;
+}
+footer.section-footer .copyright-part .copyright-text p{
+    font-size: 17px;
+    color:#fff;
+}
+footer.section-footer .copyright-part .copyright-cookies p{
+    font-size: 15px;
+    color:#ddd
+}

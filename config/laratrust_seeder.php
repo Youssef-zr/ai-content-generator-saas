@@ -13,27 +13,44 @@ return [
 
     'roles_structure' => [
         "Admin" => [
-            'user' => 'c,r,u,d',
-            'payment' => 'c,r,u,d',
+            'dashboard' => 'a',
+            'category' => 'a,c,r,u,d',
+            'question' => 'a,c,r,u,d',
+            "tone" => 'a,c,r,u,d',
+            "engine" => 'a,c,r,u,d',
+            "language" => 'a,c,r,u,d',
+            "prompt" => 'a,c,r,u,d',
+
+            "subscription_management" => 'a',
+            "subscription" => 'a,c,r,u,d',
+            "plan" => 'a,c,r,u,d',
+
+            "settings" => 'a',
+            "brand" => 'a,u',
+            "third_party" => 'a,u',
+            "content" => 'a,u',
+
+            "customize" => 'a',
+            "landing_page"=>'a,u',
+            "hero"=>'a,u',
+            "partner"=>'a,c,r,u,d',
+            "story"=>'a,u',
+            "block"=>'a,c,r,u,d',
+            "pricing"=>'a,u',
+            "testimonial"=>'a,u',
+
+            'user' => 'a,c,r,u,d',
             'profile' => 'r,u',
-            "permission" => 'c,r,u,d',
-            "role" => 'c,r,u,d',
-            "question" => 'c,r,u,d',
-            "content" => 'c,r,u,d',
-            "tone" => 'c,r,u,d',
-            "answer" => 'c,r,u,d',
-            "audit_log" => 'c,r,u,d',
-            "payment" => 'c,r,u,d',
-            "currencie" => 'c,r,u,d',
-            "plan" => 'c,r,u,d',
-            "subscription" => 'c,r,u,d',
-            "payment" => 'c,r,u,d',
+            "permission" => 'a,c,r,u,d',
+            "role" => 'a,c,r,u,d',
+            "audit_log" => 'a,c,r,u,d',
         ],
     ],
     "create_users" => [
         "admin"
     ],
     "permissions_map" => [
+        "a" => "access",
         'c' => "create",
         'r' => "read",
         'u' => "update",

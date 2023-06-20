@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('hero_title', 255)->nullable();
             $table->text('hero_subtitle')->nullable();
-            $table->string('hero_image')->nullable()->default('default.png');
+            $table->string('hero_image')->nullable()->default('assets/dist/storage/settings/default.png');
             $table->string('hero_cta', 255)->nullable();
             $table->string('hero_promotion', 255)->nullable();
 
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->string('story_subtitle', 255)->nullable();
             $table->json('story_blocks')->nullable();
             $table->string('story_promotion', 255)->nullable();
-            $table->string('story_browser_image', 255)->nullable()->default("default.png");
-            $table->string('story_phone_image', 255)->nullable()->default("default.png");
+            $table->string('story_browser_image', 255)->nullable()->default("assets/dist/storage/settings/default.png");
+            $table->string('story_phone_image', 255)->nullable()->default("assets/dist/storage/settings/default.png");
 
             $table->string('pricing_title', 255)->nullable();
             $table->string('pricing_subtitle', 255)->nullable();
@@ -35,7 +35,7 @@ return new class extends Migration
 
             $table->string('testimonial_name', 255)->nullable();
             $table->string('testimonial_title', 255)->nullable();
-            $table->string('testimonial_avatar', 255)->nullable()->default("default.png");
+            $table->string('testimonial_avatar', 255)->nullable()->default("assets/dist/storage/settings/default.png");
             $table->text('testimonial_review')->nullable();
 
             $table->timestamps();

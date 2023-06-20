@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
             $table->string('title', 255);
-            $table->string('logo', 255)->nullable()->default('default.png');
+            $table->string('logo', 255)->nullable()->default('assets/dist/storage/settings/default.png');
             $table->timestamps();
         });
     }

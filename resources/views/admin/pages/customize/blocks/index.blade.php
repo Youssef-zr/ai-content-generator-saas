@@ -25,12 +25,14 @@
 
 <!-- content -->
 @section('content')
-    <div class="new-row mb-2">
-        <a href="{{ route('blocks.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-            New Block
-        </a>
-    </div>
+    @permission('create_block')
+        <div class="new-row mb-2">
+            <a href="{{ route('blocks.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                New Block
+            </a>
+        </div>
+    @endpermission
 
     <div class="card card-primary">
         <div class="card-header ">
@@ -45,7 +47,9 @@
                         <th>Title</th>
                         <th>subtitle</th>
                         <th>icon</th>
-                        <th style="width:120px">Actions</th>
+                        @permission(['update_block', 'delete_block'])
+                            <th style="width:120px">Actions</th>
+                        @endpermission
                     </tr>
                 </thead>
                 <tbody>
@@ -65,16 +69,25 @@
                                 <img src="{{ $block->block_icon }}" alt="{{ $block->title }}" class="img-thumbnail"
                                     style="width:60px;height:60px">
                             </td>
-                            <td>
-                                <a href="{{ route('blocks.edit', $block->id) }}" class="btn btn-warning btn-sm"
-                                    title="edit" data-toggle="tooltip">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('blocks.destroy', $block->id) }}">
-                                    <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
-                                </button>
-                            </td>
+
+                            @permission(['update_block', 'delete_block'])
+                                <td>
+                                    @permission('update_block')
+                                        <a href="{{ route('blocks.edit', $block->id) }}" class="btn btn-warning btn-sm"
+                                            title="edit" data-toggle="tooltip">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('delete_block')
+                                        <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
+                                            data-target="#removeItem" data-url="{{ route('blocks.destroy', $block->id) }}">
+                                            <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
+                                        </button>
+                                    @endpermission
+                                </td>
+                            @endpermission
+                            
                         </tr>
                     @endforeach
                 </tbody>

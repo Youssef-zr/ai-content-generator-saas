@@ -21,11 +21,13 @@ class HeroRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-           'hero_title'=>'sometimes|nullable|max:255',
-           'hero_subtitle'=>'sometimes|nullable|max:255',
-           'hero_cta'=>'sometimes|nullable|max:255',
-           'hero_promotion'=>'sometimes|nullable|max:255',
+            'hero_title' => 'sometimes|nullable|max:255',
+            'hero_subtitle' => 'sometimes|nullable|max:255',
+            'hero_cta' => 'sometimes|nullable|max:255',
+            'hero_promotion' => 'sometimes|nullable|max:255',
+            'hero_image' => "required|image|mimes:png,jpg,jpeg,gif"
         ];
     }
 }

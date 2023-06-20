@@ -30,7 +30,7 @@
             <h3 class="card-title"><i class="fas fa-magic mr-1"></i> Update Hero Section</h3>
         </div>
         <div class="card-body">
-            {!! Form::model($lp, ['route' => 'customize.hero_update']) !!}
+            {!! Form::model($lp, ['route' => 'customize.hero_update', 'files' => true]) !!}
             @method('put')
 
             <!-- hero title field -->
@@ -43,6 +43,50 @@
                 @if ($errors->has('hero_title'))
                     <span class="help-block">
                         <strong>{{ $errors->first('hero_title') }}</strong>
+                    </span>
+                @endif
+            </div>
+
+            <!-- hero image -->
+            <div class="form-group {{ $errors->has('hero_image') ? 'has-error' : '' }}">
+                <label for="hero_image">
+                    Image
+                </label>
+
+                <small id="status_block" class="form-text text-muted mt-0">
+                    Recommended size 1098px x 740px
+                </small>
+
+                <small id="status_block" class="form-text text-muted mt-0">
+                    image mimes type : png, jpg, jpeg, gif
+                </small>
+
+                <div class="box-input js mt-2">
+                    {!! Form::file('hero_image', [
+                        'class' => 'inputfile inputfile-1',
+                        'id' => 'file-1',
+                        'data-preview' => '#hero-preview',
+                        'data-multiple-caption' => '{count} files selected',
+                    ]) !!}
+                    <label for="file-1">
+                        <i class="fa fa-upload"></i>
+                        <span>choose file &hellip;</span>
+                    </label>
+                </div>
+
+                <div class="image">
+                    @if (isset($lp))
+                        <img src="{{ url($lp->hero_image) }}" id="hero-preview" class="img-thumbnail"
+                            style="max-width: 300px">
+                    @else
+                        <img src="{{ url('/assets/dist/storage/customize/hero/default.png') }}" id="hero-preview"
+                            class="img-thumbnail" style="max-width: 300px">
+                    @endif
+                </div>
+
+                @if ($errors->has('hero_image'))
+                    <span class="help-block d-block mt-2">
+                        <strong>{{ $errors->first('hero_image') }}</strong>
                     </span>
                 @endif
             </div>
@@ -90,12 +134,14 @@
             </div>
 
             <!-- submit button -->
-            <div class="form-group">
-                <button type="submit" class="btn btn-warning">
-                    <i class="fa fa-pencil"></i>
-                    Update
-                </button>
-            </div>
+            @permission('update_hero')
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fa fa-pencil"></i>
+                        Update
+                    </button>
+                </div>
+            @endpermission
 
             {!! Form::close() !!}
         </div>

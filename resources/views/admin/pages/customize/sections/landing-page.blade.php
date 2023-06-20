@@ -57,8 +57,7 @@
                     <span class="star text-danger">*</span>
                 </div>
                 <div class="select mb-2">
-                    <button class="btn btn-primary btn-sm" id="select-all"
-                        data-blocks="{{ implode(',', $lp->partners) }}">
+                    <button class="btn btn-primary btn-sm" id="select-all" data-blocks="{{ implode(',', $lp->partners) }}">
                         <i class="fa fa-check"></i> Select All
                     </button>
                     <button class="btn btn-danger btn-sm" id="deselect-all">
@@ -131,12 +130,14 @@
             </div>
 
             <!-- submit button -->
-            <div class="form-group">
-                <button type="submit" class="btn btn-warning">
-                    <i class="fa fa-pencil"></i>
-                    Update
-                </button>
-            </div>
+            @permission('update_landing_page')
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fa fa-pencil"></i>
+                        Update
+                    </button>
+                </div>
+            @endpermission
 
             {!! Form::close() !!}
         </div>

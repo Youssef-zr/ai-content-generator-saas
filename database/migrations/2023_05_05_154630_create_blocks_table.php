@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 255);
             $table->string('subtitle', 255);
-            $table->string('icon', 255)->nullable()->default('default.png');
+            $table->string('icon', 255)->nullable()->default('assets/dist/storage/settings/default.png');
             $table->timestamps();
         });
     }

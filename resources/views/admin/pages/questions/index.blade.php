@@ -25,12 +25,14 @@
 
 <!-- content -->
 @section('content')
-    <div class="new-row mb-2">
-        <a href="{{ route('questions.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-            New Question
-        </a>
-    </div>
+    @permission('create_question')
+        <div class="new-row mb-2">
+            <a href="{{ route('questions.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                New Question
+            </a>
+        </div>
+    @endpermission
 
     <div class="card card-primary">
         <div class="card-header ">
@@ -46,7 +48,9 @@
                         <th>Type</th>
                         <th>Required</th>
                         <th>Min Answer Length</th>
-                        <th style="width:120px">Actions</th>
+                        @permission(['read_question', 'update_question', 'delete_question'])
+                            <th style="width:120px">Actions</th>
+                        @endpermission
                     </tr>
                 </thead>
                 <tbody>
@@ -64,20 +68,32 @@
                             <td>{{ question_type()[$question->type] }}</td>
                             <td>{{ question_is_required()[$question->is_required] }}</td>
                             <td>{{ $question->minimum_answer_length }}</td>
-                            <td>
-                                <a href="{{ route('questions.show', $question->id) }}" class="btn btn-primary btn-sm"
-                                    title="show information" data-toggle="tooltip">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-warning btn-sm"
-                                    title="edit" data-toggle="tooltip">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('questions.destroy', $question->id) }}">
-                                    <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
-                                </button>
-                            </td>
+
+                            @permission(['read_question', 'update_question', 'delete_question'])
+                                <td>
+                                    @permission('read_question')
+                                        <a href="{{ route('questions.show', $question->id) }}" class="btn btn-primary btn-sm"
+                                            title="show information" data-toggle="tooltip">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('update_question')
+                                        <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-warning btn-sm"
+                                            title="edit" data-toggle="tooltip">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('delete_question')
+                                        <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
+                                            data-target="#removeItem" data-url="{{ route('questions.destroy', $question->id) }}">
+                                            <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
+                                        </button>
+                                    @endpermission
+                                </td>
+                            @endpermission
+
                         </tr>
                     @endforeach
                 </tbody>

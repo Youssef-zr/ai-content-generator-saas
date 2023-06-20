@@ -25,12 +25,14 @@
 
 <!-- content -->
 @section('content')
-    <div class="new-row mb-2">
-        <a href="{{ route('partners.create') }}" class="btn btn-primary">
-            <i class="fa fa-plus"></i>
-            New Partner
-        </a>
-    </div>
+    @permission('create_partner')
+        <div class="new-row mb-2">
+            <a href="{{ route('partners.create') }}" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                New Partner
+            </a>
+        </div>
+    @endpermission
 
     <div class="card card-primary">
         <div class="card-header ">
@@ -44,7 +46,9 @@
                         <th style="width:20px">#</th>
                         <th>Title</th>
                         <th>Logo</th>
-                        <th style="width:120px">Actions</th>
+                        @permission(['update_partner', 'delete_partner'])
+                            <th style="width:120px">Actions</th>
+                        @endpermission
                     </tr>
                 </thead>
                 <tbody>
@@ -63,16 +67,25 @@
                                 <img src="{{ $partner->partner_logo }}" alt="{{ $partner->title }}" class="img-thumbnail"
                                     style="width:60px;height:60px">
                             </td>
-                            <td>
-                                <a href="{{ route('partners.edit', $partner->id) }}" class="btn btn-warning btn-sm"
-                                    title="edit" data-toggle="tooltip">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
-                                    data-target="#removeItem" data-url="{{ route('partners.destroy', $partner->id) }}">
-                                    <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
-                                </button>
-                            </td>
+
+                            @permission(['update_partner', 'delete_partner'])
+                                <td>
+                                    @permission('update_partner')
+                                        <a href="{{ route('partners.edit', $partner->id) }}" class="btn btn-warning btn-sm"
+                                            title="edit" data-toggle="tooltip">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    @endpermission
+
+                                    @permission('delete_partner')
+                                        <button class="btn btn-danger btn-sm open-modal-remove" data-toggle="modal"
+                                            data-target="#removeItem" data-url="{{ route('partners.destroy', $partner->id) }}">
+                                            <i class="fa fa-trash" data-toggle="tooltip" title="delete"></i>
+                                        </button>
+                                    @endpermission
+                                </td>
+                            @endpermission
+
                         </tr>
                     @endforeach
                 </tbody>

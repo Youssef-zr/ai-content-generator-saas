@@ -143,7 +143,7 @@
             <!-- story phone image field -->
             <div class="form-group {{ $errors->has('story_phone_image') ? 'has-error' : '' }}">
                 <label for="story_phone_image">
-                    Browser Image
+                    Phone Image
                 </label>
 
                 <small id="story_phone_image" class="form-text text-muted mt-0">
@@ -180,12 +180,14 @@
             </div>
 
             <!-- submit button -->
-            <div class="form-group">
-                <button type="submit" class="btn btn-warning">
-                    <i class="fa fa-pencil"></i>
-                    Update
-                </button>
-            </div>
+            @permission('update_story')
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fa fa-pencil"></i>
+                        Update
+                    </button>
+                </div>
+            @endpermission
 
             {!! Form::close() !!}
         </div>

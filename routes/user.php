@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\{
-    FrontendController,
+use App\Http\Controllers\Dashboard\User\{
+    DashboardController,
     ProfileController,
     SettingController,
     ToolController
@@ -10,7 +10,7 @@ use App\Http\Controllers\Frontend\{
 
 Route::group(["middleware" => ["web", "auth", 'role:User']], function () {
 
-    Route::get('/', [FrontendController::class, "home"])->name('frontend.home');
+    Route::get('/', [DashboardController::class, "home"])->name('frontend.home');
 
     Route::get('/history', [ToolController::class, "history"])->name('frontend.history');
     Route::get('/content/new', [ToolController::class, 'show_prompt_view'])->name("content.prompt.show");
@@ -23,7 +23,8 @@ Route::group(["middleware" => ["web", "auth", 'role:User']], function () {
     Route::delete('/content/{id}/delete', [ToolController::class, "delete_content"])->name('content.destroy');
     Route::get('/content/delete/all', [ToolController::class, "delete_all"])->name('content.delete-all');
 
-    Route::get('/test', [FrontendController::class, "store_content"]);
+    Route::get('/test', [DashboardController::class, "store_content"]);
+    
     // settings
     Route::get('/settings', [SettingController::class, "show_settings"])->name('frontend.user.show_settings');
     Route::put('/settings', [SettingController::class, "update_settings"])->name('frontend.user.update_settings');

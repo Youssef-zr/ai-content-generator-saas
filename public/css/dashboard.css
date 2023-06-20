@@ -179,6 +179,7 @@ div.dt-button-collection {
 .has-error .form-controll,
 .has-error .help-block {
     color: #dc3545 !important;
+    text-transform: capitalize;
 }
 .has-error .form-control,
 .has-error .note-editor.note-airframe,
