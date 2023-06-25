@@ -103,7 +103,7 @@ table tbody tr > td:nth-of-type(2) {
     padding-right: 0px;
 }
 .form-group{
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 .form-group,
 .form-group .form-control::placeholder {
@@ -184,7 +184,7 @@ div.dt-button-collection {
 .has-error .form-control,
 .has-error .note-editor.note-airframe,
 .has-error .note-editor.note-frame,
-.has-error .select-2 {
+.has-error .select2 .select2-selection--single{
     border: 1px solid #dc3545 !important;
 }
 .has-error .help-block strong {

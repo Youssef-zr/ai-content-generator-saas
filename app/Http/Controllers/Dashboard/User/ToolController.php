@@ -22,7 +22,7 @@ class ToolController extends Controller
             ->with(['prompt' => fn ($q) => $q->select(['id', 'title'])])
             ->orderBy("id", "desc")->get();
 
-        return view("frontend.pages.tools.history", compact("contents"));
+        return view("user.pages.tools.history", compact("contents"));
     }
 
     public function show_prompt_view(Request $request)
@@ -43,7 +43,7 @@ class ToolController extends Controller
         $prompt_questions = $prompt->questions($prompt->questions);
 
         if ($prompt->type == "image") {
-            return view('frontend.pages.tools.images.create', compact("prompt", "prompt_questions"));
+            return view('user.pages.tools.images.create', compact("prompt", "prompt_questions"));
         } else {
 
             $tones = Tone::pluck('tone', "id")->toArray();
@@ -51,7 +51,7 @@ class ToolController extends Controller
             $userSetting = Settings::where("user_id", auth()->user()->id)
                 ->first();
 
-            return view("frontend.pages.tools.contents.create", compact("prompt", "prompt_questions", "tones", "langs", "userSetting"));
+            return view("user.pages.tools.contents.create", compact("prompt", "prompt_questions", "tones", "langs", "userSetting"));
         }
     }
 
@@ -176,7 +176,7 @@ class ToolController extends Controller
         $userSetting = Settings::where("user_id", auth()->user()->id)
             ->first();
 
-        return view("frontend.pages.tools.contents.edit", compact('content', "prompt", "prompt_questions", "tones", "langs", "userSetting"));
+        return view("user.pages.tools.contents.edit", compact('content', "prompt", "prompt_questions", "tones", "langs", "userSetting"));
     }
     // -----------------------------------------------------------------------------
 
@@ -235,7 +235,7 @@ class ToolController extends Controller
         $prompt = $content->prompt;
         $prompt_questions = $prompt->questions($prompt->questions);
 
-        return view('frontend.pages.tools.images.create', compact("content", "prompt", "prompt_questions"));
+        return view('user.pages.tools.images.create', compact("content", "prompt", "prompt_questions"));
     }
 
     // ------------------------------------------------------------------

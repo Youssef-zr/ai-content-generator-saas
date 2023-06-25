@@ -1,6 +1,10 @@
 <?php
 
 use App\Models\Front\Design;
+use Illuminate\Support\Facades\{
+    Auth,
+    Route,
+};
 use App\Models\{
     Block,
     Partner,
@@ -8,11 +12,6 @@ use App\Models\{
     Prompt,
     Setting,
     Category
-};
-
-use Illuminate\Support\Facades\{
-    Auth,
-    Route,
 };
 
 /*
@@ -36,17 +35,18 @@ Route::get('/', function () {
     $tools = Category::orderBy("id", "desc")->pluck('title')->toArray();
     $prompts = Prompt::orderBy("id", "desc")->limit(5)->pluck('title')->toArray();
 
-    // dd($site);
-    // dd($blocks);
-    // dd($plans);
-    // dd($prompts);
-    // dd($tools);
-    // dd($setting);
-
     return view(
-        "frontend.site.index",
+        "user.site.index",
         compact('plans', 'site', 'partners', 'setting', 'tools', 'prompts', 'blocks')
     );
+});
+
+Route::group(["middleware" => "auth"], function () {
+    // user routes
+    Route::get("profile", [ProfileController::class, 'show_profile'])->name('user.show_profile');
+    Route::put("update-information", [ProfileController::class, 'update_information'])->name('user.update_information');
+    Route::put("update-password", [ProfileController::class, 'update_password'])->name('user.update_password');
+    Route::get("logout", [ProfileController::class, 'logout'])->name('user.logout');
 });
 
 Auth::routes();

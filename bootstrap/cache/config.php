@@ -832,6 +832,12 @@
       'secret' => '',
       'region' => 'us-east-1',
     ),
+    'stripe' => 
+    array (
+      'model' => 'App\\User',
+      'key' => 'pk_test_51NLUxAGAOjNf1DSfKhOdQFkBkiYPE7XylRdK832IsB2YNo5uEJ9dSdjZGVXUK2ECZJGZKD6HaISqJBvfqfAPKYl200AHj9B0Ay',
+      'secret' => 'sk_test_51NLUxAGAOjNf1DSfgi3hJXhYaPsvi9DQF4b4cdQv5U85DqORBndHYFHNmpqLboSuPvi2Txu8hrr0qodbvtTNNHWe009vSU4fwB',
+    ),
   ),
   'session' => 
   array (
@@ -862,6 +868,40 @@
       0 => 'C:\\laragon\\www\\fiverr-sass\\resources\\views',
     ),
     'compiled' => 'C:\\laragon\\www\\fiverr-sass\\storage\\framework\\views',
+  ),
+  'cashier' => 
+  array (
+    'key' => 'pk_test_51NLUxAGAOjNf1DSfKhOdQFkBkiYPE7XylRdK832IsB2YNo5uEJ9dSdjZGVXUK2ECZJGZKD6HaISqJBvfqfAPKYl200AHj9B0Ay',
+    'secret' => 'sk_test_51NLUxAGAOjNf1DSfgi3hJXhYaPsvi9DQF4b4cdQv5U85DqORBndHYFHNmpqLboSuPvi2Txu8hrr0qodbvtTNNHWe009vSU4fwB',
+    'path' => 'stripe',
+    'webhook' => 
+    array (
+      'secret' => NULL,
+      'tolerance' => 300,
+      'events' => 
+      array (
+        0 => 'customer.subscription.created',
+        1 => 'customer.subscription.updated',
+        2 => 'customer.subscription.deleted',
+        3 => 'customer.updated',
+        4 => 'customer.deleted',
+        5 => 'payment_method.automatically_updated',
+        6 => 'invoice.payment_action_required',
+        7 => 'invoice.payment_succeeded',
+      ),
+    ),
+    'currency' => 'usd',
+    'currency_locale' => 'en',
+    'payment_notification' => NULL,
+    'invoices' => 
+    array (
+      'renderer' => 'Laravel\\Cashier\\Invoices\\DompdfInvoiceRenderer',
+      'options' => 
+      array (
+        'paper' => 'letter',
+      ),
+    ),
+    'logger' => NULL,
   ),
   'flare' => 
   array (

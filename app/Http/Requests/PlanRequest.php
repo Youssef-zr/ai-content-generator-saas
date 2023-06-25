@@ -22,21 +22,20 @@ class PlanRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'title' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:plans,name',
             'description' => 'required|string|max:255',
-            'price_monthly' => 'required|integer',
-            'price_yearly' => 'required|integer',
-            'type' => 'required|string',
+            'price' => 'required|integer',
+            'currency' => 'required|string',
+            'belling_interval' => 'required|string|in:week,month,year',
+            'type' => 'required|string|in:free,paid',
             'word_limit' => 'required|integer',
             'image_limit' => 'required|integer',
-            'pp_monthly_plan' => 'sometimes|nullable|string|max:255|unique:plans,pp_monthly_plan',
-            'pp_yearly_plan' => 'sometimes|nullable|string|max:255|unique:plans,pp_yearly_plan',
         ];
 
         $method = strtolower(request()->method());
+
         if ($method == "put") {
-            $rules["pp_monthly_plan"] = 'sometimes|nullable|string|max:255|unique:plans,pp_monthly_plan,' . request()->plan->id;
-            $rules["pp_yearly_plan"] = 'sometimes|nullable|string|max:255|unique:plans,pp_yearly_plan,' . request()->plan->id;
+            $rules["name"] = 'sometimes|nullable|string|max:255|unique:plans,name,' . request()->plan->id;
         }
 
         return $rules;

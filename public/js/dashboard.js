@@ -19,7 +19,7 @@ $(() => {
     let languages = {
         en: "https://cdn.datatables.net/plug-ins/1.10.19/i18n/English.json",
     };
-    $(".table").DataTable({
+    var $table = $(".table").DataTable({
         language: {
             url: languages["en"],
         },
@@ -126,6 +126,7 @@ $(() => {
 
     $.fn.dataTable.ext.classes.sPageButton = "";
 
+    window.dt_table = $table;
     // other features
     // open modal remove
     let formDelete = $(".form-remove-item");
@@ -218,15 +219,5 @@ $(() => {
             )}`;
             window.location = url;
         }
-    });
-
-    // nav container click close
-    let $sideLinks = $(".nav-container");
-    $(".nav-container").on("click", function () {
-        $(this)
-            .addClass("menu-is-opening menu-open")
-            .find(".nav-treeview")
-            .css("display", "block");
-        $sideLinks.removeClass("menu-is-opening menu-open");
     });
 });

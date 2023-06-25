@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Dashboard\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlanRequest;
 use App\Models\Plan;
+use Exception;
+use Stripe\Plan as StripePlan;
+use Stripe\Stripe;
 
 class PlanController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('permission:access_plan')->only('index');
@@ -16,6 +18,9 @@ class PlanController extends Controller
         $this->middleware('permission:update_plan')->only(['edit', 'update']);
         $this->middleware('permission:read_plan')->only(['edit', 'show']);
         $this->middleware('permission:delete_plan')->only(['delete', 'delete-all']);
+
+        // set stripe api key
+        Stripe::setApiKey(config("services.stripe.secret"));
     }
 
     /**
@@ -40,7 +45,31 @@ class PlanController extends Controller
      */
     public function store(PlanRequest $request)
     {
-        Plan::create($request->all());
+        $data = $request->all();
+
+        try {
+            $dbPlan = Plan::create($data);
+
+            // check if paid product to store in stripe db
+            if ($data['type'] == "paid") {
+                $plan = StripePlan::create([
+                    "amount" => ($data['price'] * 100),
+                    "currency" => $data['currency'],
+                    "interval" => $data['billing_interval'],
+                    "product" => [
+                        "name" => $data['name']
+                    ]
+                ]);
+
+                $dbPlan->fill([
+                    'stripe_plan_id' => $plan->id,
+                    'stripe_product_id' => $plan->product,
+                ])->save();
+            }
+        } catch (Exception $ex) {
+            dd($ex->getMessage());
+        }
+
         return redirect_with_flash("msgSuccess", "Plan created successfully", "subscriptions/plans");
     }
 
@@ -66,6 +95,7 @@ class PlanController extends Controller
     public function update(PlanRequest $request, Plan $plan)
     {
         $plan->fill($request->all())->save();
+
         return redirect_with_flash("msgSuccess", "Plan updated successfully", "subscriptions/plans");
     }
 
@@ -74,7 +104,9 @@ class PlanController extends Controller
      */
     public function destroy(Plan $plan)
     {
+        // remove product from plans table
         $plan->delete();
+
         return redirect_with_flash("msgSuccess", "Plan deleted successfully", "subscriptions/plans");
     }
 

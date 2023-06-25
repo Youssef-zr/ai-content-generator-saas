@@ -39,9 +39,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><strong>title</strong></td>
+                        <td><strong>stripe plan id</strong></td>
                         <td>
-                            <p>{{ $plan->title }}</p>
+                            <p>{{ $plan->stripe_plan_id ?? "---" }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>name</strong></td>
+                        <td>
+                            <p>{{ $plan->name }}</p>
                         </td>
                     </tr>
                     <tr>
@@ -51,15 +57,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><strong>price (monthly)</strong></td>
+                        <td><strong>price</strong></td>
                         <td>
-                            <p>{{ $plan->price_monthly }}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>price (yearly)</strong></td>
-                        <td>
-                            <p>{{ $plan->price_yearly }}</p>
+                            <p>{{ $plan->price }}</p>
                         </td>
                     </tr>
                     <tr>
@@ -88,10 +88,11 @@
 
 @push('css')
     <style>
-        table tbody tr td:first-of-type{
-            width:120px
+        table tbody tr td:first-of-type {
+            width: 120px
         }
-        table tbody tr p{
+
+        table tbody tr p {
             margin-bottom: 0;
         }
     </style>

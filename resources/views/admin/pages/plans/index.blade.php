@@ -39,15 +39,16 @@
             <h3 class="card-title"><i class="fas fa-cubes mr-1"></i> Plans List</h3>
         </div>
         <div class="card-body">
-            <table class="table table-striped table-hovered w-100" data-remove="{{ route('plans.delete-all') }}">
+            <table class="table table-striped table-hovered w-100 text-capitalize" data-remove="{{ route('plans.delete-all') }}">
                 <thead>
                     <tr>
                         <th style="width:5px"></th>
                         <th style="width:20px">#</th>
-                        <th>Title</th>
-                        <th>Price (Monthly)</th>
-                        <th>Price (Yearly)</th>
+                        <th>Name</th>
+                        <th>Price</th>
                         <th>Type</th>
+                        <th>Billing Method</th>
+                        <th>Currency</th>
                         <th>Word Limit</th>
                         <th>Image Limit</th>
                         @permission(['read_plan', 'update_plan', 'delete_plan'])
@@ -66,10 +67,11 @@
                                 </div>
                             </td>
                             <td>{{ $plan->id }}</td>
-                            <td>{{ $plan->title }}</td>
-                            <td>{{ $plan->price_monthly . '.00' }}</td>
-                            <td>{{ $plan->price_yearly . '.00' }}</td>
+                            <td>{{ $plan->name }}</td>
+                            <td>{{ $plan->price . '.00' }}</td>
                             <td>{{ $plan->type }}</td>
+                            <td>{{ plans_belling_interval()[$plan->billing_interval] }}</td>
+                            <td>{{ $plan->type != 'free' ? $plan->currency : '---' }}</td>
                             <td>{{ $plan->word_limit }}</td>
                             <td>{{ $plan->image_limit }}</td>
 

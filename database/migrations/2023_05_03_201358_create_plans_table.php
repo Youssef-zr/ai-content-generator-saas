@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255);
+            $table->string('stripe_plan_id')->nullable();
+            $table->string('stripe_product_id')->nullable();
+            $table->string('name', 255);
             $table->string('description', 255);
-            $table->integer('price_monthly');
-            $table->integer('price_yearly');
+            $table->enum('billing_interval', ['week', 'month','year'])->nullable();
+            $table->string('currency', 255);
+            $table->integer('price');
             $table->enum('type', ['paid', 'free']);
             $table->integer('word_limit');
             $table->integer('image_limit');
-            $table->string('pp_monthly_plan')->nullable();
-            $table->string('pp_yearly_plan')->nullable();
             $table->timestamps();
         });
     }

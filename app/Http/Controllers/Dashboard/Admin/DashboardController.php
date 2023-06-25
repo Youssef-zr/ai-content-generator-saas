@@ -13,6 +13,9 @@ class DashboardController extends Controller
 
     public function statistics()
     {
+        // $user = auth()->user();
+        // dd($user->subscribed());
+
         return view('admin.pages.index');
     }
 }

@@ -5,63 +5,125 @@ namespace Database\Seeders;
 use App\Models\Plan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Stripe\Plan as StripePlan;
+use Stripe\Stripe;
+use Stripe\StripeClient;
 
 class PlanTableSeeder extends Seeder
 {
+    protected $stripeClient;
+
+    public function __construct()
+    {
+        $this->stripeClient = new StripeClient(config('services.stripe.secret'));
+    }
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+
+        // set stripe secret key
+        Stripe::setApiKey(config("services.stripe.secret"));
+
         $plans = [
-            [
-                "title" => "Free",
-                "description" => "Get started with basic features, no credit card required.",
-                "price_monthly" => "0",
-                "price_yearly" => "0",
-                "type" => "free",
-                "word_limit" => "1500",
-                "image_limit" => "500",
-                "pp_monthly_plan" => "",
-                "pp_yearly_plan" => "",
+            [ // Free plan
+                [],
+                [
+                    "stripe_plan_id" => "",
+                    "name" => "Free",
+                    "description" => "Get started with basic features, no credit card required.",
+                    "billing_interval" => "month",
+                    "currency" => "USD",
+                    "price" => "0",
+                    "type" => 'free',
+                    "word_limit" => '1000',
+                    "image_limit" => '20',
+                ]
             ],
-            [
-                "title" => "Pro",
-                "description" => "Unlock advanced features and priority support.",
-                "price_monthly" => "10",
-                "price_yearly" => "108",
-                "type" => "paid",
-                "word_limit" => "5000",
-                "image_limit" => "1000",
-                "pp_monthly_plan" => "P-91H563139D769654RMPOWJQQ",
-                "pp_yearly_plan" => "P-37U95393T2635261PMPOWOKQ",
+            [ // pro plan
+                [
+                    "amount" => 1000, // 10 dollar
+                    "currency" => "USD",
+                    "interval" => 'month',
+                    "product" => [
+                        "name" => "Pro",
+                    ]
+                ],
+                [
+                    "stripe_plan_id" => "",
+                    "name" => "Pro",
+                    "description" => "Unlock advanced features and priority support.",
+                    "billing_interval" => "month",
+                    "currency" => "USD",
+                    "price" => "10",
+                    "type" => 'paid',
+                    "word_limit" => '5000',
+                    "image_limit" => '100',
+                ]
             ],
-            [
-                "title" => "Business",
-                "description" => "Access premium tools and team collaboration options.",
-                "price_monthly" => "20",
-                "price_yearly" => "216",
-                "type" => "paid",
-                "word_limit" => "10000",
-                "image_limit" => "200",
-                "pp_monthly_plan" => "P-3XC304917S424213CMPOWPGY",
-                "pp_yearly_plan" => "P-85174520P94563258MPOWPUY",
+            [ // Business plan
+                [
+                    "amount" => 2000, // 20 dollar
+                    "currency" => "USD",
+                    "interval" => 'month',
+                    "product" => [
+                        "name" => "Business",
+                    ]
+                ],
+                [
+                    "stripe_plan_id" => "",
+                    "name" => "Business",
+                    "description" => "Access premium tools and team collaboration options.",
+                    "billing_interval" => "month",
+                    "currency" => "USD",
+                    "price" => "20",
+                    "type" => 'paid',
+                    "word_limit" => '10000',
+                    "image_limit" => '200',
+                ]
             ],
-            [
-                "title" => "Enterprise",
-                "description" => "Customizable solutions for large projects and dedicated support.",
-                "price_monthly" => "50",
-                "price_yearly" => "540",
-                "type" => "paid",
-                "word_limit" => "500000",
-                "image_limit" => "4000",
-                "pp_monthly_plan" => "P-90W42065MA850360TMPOWP4Y",
-                "pp_yearly_plan" => "P-18V52260RW302494HMPOWQDY",
+            [ // Entreprise plan
+                [
+                    "amount" => 5000, // 50 dollar
+                    "currency" => "USD",
+                    "interval" => 'month',
+                    "product" => [
+                        "name" => "Enterprise",
+                    ]
+                ],
+                [
+                    "stripe_plan_id" => "",
+                    "name" => "Enterprise",
+                    "description" => "Customizable solutions for large projects and dedicated support.",
+                    "billing_interval" => "month",
+                    "currency" => "USD",
+                    "price" => "50",
+                    "type" => 'paid',
+                    "word_limit" => '70000',
+                    "image_limit" => '400',
+                ]
             ],
         ];
 
+
         foreach ($plans as $plan) {
-            Plan::create($plan);
+
+            $stripeData = $plan[0];
+            $stripePlan = [];
+            if ($stripeData != []) {
+                $stripePlan = StripePlan::create($stripeData);
+            }
+
+            $dbPlanData = $plan[1];
+            $newDbPlan = Plan::create($dbPlanData);
+
+            if ($stripePlan != []) {
+                $newDbPlan->fill([
+                    'stripe_plan_id' => $stripePlan->id,
+                    'stripe_product_id' => $stripePlan->product,
+                ])->save();
+            }
         }
     }
 }

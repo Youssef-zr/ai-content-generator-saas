@@ -24,7 +24,7 @@ class BlockRequest extends FormRequest
         $rules = [
             "title" => "required|string|max:255|unique:blocks,title",
             "subtitle" => "required|string|max:255",
-            "icon" => 'sometimes|nullable|image|mimes:png,jpg,jpeg,gif'
+            "icon" => 'sometimes|nullable|image|mimes:jpg,png,jpeg,gif|max:1024'
         ];
 
         $method = strtolower(request()->method());

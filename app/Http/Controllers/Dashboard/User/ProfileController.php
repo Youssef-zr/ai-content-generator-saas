@@ -21,7 +21,7 @@ class ProfileController extends Controller
     public function show_profile()
     {
         $auth_user = Auth::user();
-        return view("frontend.pages.user.profile", compact("auth_user"));
+        return view("user.pages.user.profile", compact("auth_user"));
     }
 
     // update user profile information

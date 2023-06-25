@@ -15,9 +15,9 @@ class SettingController extends Controller
         $languages = Language::pluck('language', "id")->toArray();
         $userDefaultLang = auth()->user()->settings;
 
-        return view("frontend.pages.user.settings", compact("languages", "userDefaultLang"));
+        return view("user.pages.user.settings", compact("languages", "userDefaultLang"));
     }
-    
+
     public function update_settings(Request $request)
     {
         $user = auth()->user();

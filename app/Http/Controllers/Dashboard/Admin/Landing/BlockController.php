@@ -10,7 +10,7 @@ use App\Traits\UploadFiles;
 class BlockController extends Controller
 {
     use UploadFiles;
-    
+
     public function __construct()
     {
         $this->middleware('permission:access_block', ['only' => 'index']);
@@ -119,8 +119,8 @@ class BlockController extends Controller
                 "storagePath" => $storagePath,
                 "old_image" => $oldFile,
                 "default" => $default,
-                "width" => 68,
-                "height" => 68,
+                "width" => 76,
+                "height" => 76,
                 "quality" => 96
             ];
 

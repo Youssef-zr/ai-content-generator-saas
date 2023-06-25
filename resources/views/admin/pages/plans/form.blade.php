@@ -1,16 +1,16 @@
-<!-- title field -->
-<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
+<!-- name field -->
+<div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
     <div class="option">
-        {!! Form::label('title', 'Title', ['class' => 'form-label']) !!}
+        {!! Form::label('name', 'name', ['class' => 'form-label']) !!}
         <span class="star text-danger">*</span>
     </div>
-    {!! Form::text('title', old('title'), [
+    {!! Form::text('name', old('name'), [
         'class' => 'form-control',
-        'placeholder' => 'Enter a title here',
+        'placeholder' => 'Plan name',
     ]) !!}
-    @if ($errors->has('title'))
+    @if ($errors->has('name'))
         <span class="help-block">
-            <strong>{{ $errors->first('title') }}</strong>
+            <strong>{{ $errors->first('name') }}</strong>
         </span>
     @endif
 </div>
@@ -23,7 +23,7 @@
     </div>
     {!! Form::text('description', old('description'), [
         'class' => 'form-control',
-        'placeholder' => 'Enter a description here',
+        'placeholder' => 'Plan description',
     ]) !!}
     @if ($errors->has('description'))
         <span class="help-block">
@@ -32,38 +32,56 @@
     @endif
 </div>
 
-<!-- price monthly field -->
-<div class="form-group {{ $errors->has('price_monthly') ? 'has-error' : '' }}">
+<!-- price field -->
+<div class="form-group {{ $errors->has('price') ? 'has-error' : '' }}">
     <div class="option">
-        {!! Form::label('price_monthly', 'price monthly', ['class' => 'form-label']) !!}
+        {!! Form::label('price', 'price', ['class' => 'form-label']) !!}
         <span class="star text-danger">*</span>
     </div>
-    {!! Form::number('price_monthly', old('price_monthly'), [
+    {!! Form::number('price', old('price'), [
         'class' => 'form-control',
-        'placeholder' => 'plan monthly price',
+        'placeholder' => 'plan price',
     ]) !!}
 
-    @if ($errors->has('price_monthly'))
+    @if ($errors->has('price'))
         <span class="help-block">
-            <strong>{{ $errors->first('price_monthly') }}</strong>
+            <strong>{{ $errors->first('price') }}</strong>
         </span>
     @endif
 </div>
 
-<!-- price yearly field -->
-<div class="form-group {{ $errors->has('price_yearly') ? 'has-error' : '' }}">
+<!-- currency field -->
+<div class="form-group {{ $errors->has('currency') ? 'has-error' : '' }}">
     <div class="option">
-        {!! Form::label('price_yearly', 'price yearly', ['class' => 'form-label']) !!}
+        {!! Form::label('currency', 'currency', ['class' => 'form-label']) !!}
         <span class="star text-danger">*</span>
     </div>
-    {!! Form::number('price_yearly', old('price_yearly'), [
-        'class' => 'form-control',
-        'placeholder' => 'plan yearly price',
+    {!! Form::select('currency', currency_list(), old('currency'), [
+        'class' => 'form-control select-2',
+        'placeholder' => 'please select',
     ]) !!}
 
-    @if ($errors->has('price_yearly'))
+    @if ($errors->has('currency'))
         <span class="help-block">
-            <strong>{{ $errors->first('price_yearly') }}</strong>
+            <strong>{{ $errors->first('currency') }}</strong>
+        </span>
+    @endif
+</div>
+
+<!-- billing interval field -->
+<div class="form-group {{ $errors->has('billing_interval') ? 'has-error' : '' }}">
+    <div class="option">
+        {!! Form::label('billing_interval', 'Belling Interval', ['class' => 'form-label']) !!}
+        <span class="star text-danger">*</span>
+    </div>
+    {!! Form::select('billing_interval', plans_belling_interval(), old('billing_interval'), [
+        'class' => 'form-control select-2',
+        'placeholder' => 'please select',
+    ]) !!}
+
+    @if ($errors->has('billing_interval'))
+        <span class="help-block">
+            <strong>{{ $errors->first('billing_interval') }}</strong>
         </span>
     @endif
 </div>
@@ -75,7 +93,7 @@
         <span class="star text-danger">*</span>
     </div>
     {!! Form::select('type', plans_type(), old('type'), [
-        'class' => 'form-control',
+        'class' => 'form-control select-2',
         'placeholder' => 'please select',
     ]) !!}
 
@@ -122,37 +140,6 @@
     @endif
 </div>
 
-<!-- paypal monthly plan id field -->
-<div class="form-group {{ $errors->has('pp_monthly_plan') ? 'has-error' : '' }}">
-    {!! Form::label('pp_monthly_plan', 'paypal monthly plan id', ['class' => 'form-label']) !!}
-    {!! Form::text('pp_monthly_plan', old('pp_monthly_plan'), [
-        'class' => 'form-control',
-        'placeholder' => 'paypal monthly plan',
-    ]) !!}
-
-    @if ($errors->has('pp_monthly_plan'))
-        <span class="help-block">
-            <strong>{{ $errors->first('pp_monthly_plan') }}</strong>
-        </span>
-    @endif
-</div>
-
-<!-- paypal yearly plan id field -->
-<div class="form-group {{ $errors->has('pp_yearly_plan') ? 'has-error' : '' }}">
-    {!! Form::label('pp_yearly_plan', 'paypal yealy plan id', ['class' => 'form-label']) !!}
-    {!! Form::text('pp_yearly_plan', old('pp_yearly_plan'), [
-        'class' => 'form-control',
-        'placeholder' => 'paypal yealy plan',
-    ]) !!}
-
-    @if ($errors->has('pp_yearly_plan'))
-        <span class="help-block">
-            <strong>{{ $errors->first('pp_yearly_plan') }}</strong>
-        </span>
-    @endif
-</div>
-
-
 <!-- submit button -->
 <div class="form-group">
     @if (isset($plan))
@@ -167,3 +154,16 @@
         </button>
     @endif
 </div>
+
+@push('css')
+    <link rel="stylesheet" href="{{ url('adminLte/plugins/select2/css/select2.min.css') }}">
+@endpush
+
+@push('javascript')
+    <script src="{{ url('adminLte/plugins/select2/js/select2.min.js') }}"></script>
+    <script>
+        $(() => {
+            $('.select-2').select2()
+        })
+    </script>
+@endpush

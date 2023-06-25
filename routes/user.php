@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\User\{
     DashboardController,
-    ProfileController,
+    SubscriptionController,
     SettingController,
     ToolController
 };
 
 Route::group(["middleware" => ["web", "auth", 'role:User']], function () {
 
-    Route::get('/', [DashboardController::class, "home"])->name('frontend.home');
+    Route::get('/', [DashboardController::class, "home"])->name('user.home');
 
-    Route::get('/history', [ToolController::class, "history"])->name('frontend.history');
+    Route::get('/history', [ToolController::class, "history"])->name('user.history');
     Route::get('/content/new', [ToolController::class, 'show_prompt_view'])->name("content.prompt.show");
     Route::post('/content-text/store', [ToolController::class, "store_content_text"])->name('textType.store');
     Route::get('/content/{id}/edit', [ToolController::class, "edit_content_text"])->name('content.edit');
@@ -24,14 +24,15 @@ Route::group(["middleware" => ["web", "auth", 'role:User']], function () {
     Route::get('/content/delete/all', [ToolController::class, "delete_all"])->name('content.delete-all');
 
     Route::get('/test', [DashboardController::class, "store_content"]);
-    
-    // settings
-    Route::get('/settings', [SettingController::class, "show_settings"])->name('frontend.user.show_settings');
-    Route::put('/settings', [SettingController::class, "update_settings"])->name('frontend.user.update_settings');
 
-    // user profile routes
-    Route::get("profile", [ProfileController::class, 'show_profile'])->name('frontend.user.show_profile');
-    Route::put("update-information", [ProfileController::class, 'update_information'])->name('frontend.user.update_information');
-    Route::put("update-password", [ProfileController::class, 'update_password'])->name('frontend.user.update_password');
-    Route::get("logout", [ProfileController::class, 'logout'])->name('frontend.user.logout');
+    // settings
+    Route::get('/settings', [SettingController::class, "show_settings"])->name('user.show_settings');
+    Route::put('/settings', [SettingController::class, "update_settings"])->name('user.update_settings');
+
+    // user subscription
+    Route::get('subscription', [SubscriptionController::class, 'subscription'])->name('user.subscription');
+
+    // user payments
+    Route::post('subscription/payment', [SubscriptionController::class, "subscription_payment"])->name('user.subscription.payment');
+    Route::get('payments', [SubscriptionController::class, 'userSubscriptions'])->name('user.payments');
 });
