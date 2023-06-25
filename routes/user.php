@@ -33,6 +33,9 @@ Route::group(["middleware" => ["web", "auth", 'role:User']], function () {
     Route::get('subscription', [SubscriptionController::class, 'subscription'])->name('user.subscription');
 
     // user payments
-    Route::post('subscription/payment', [SubscriptionController::class, "subscription_payment"])->name('user.subscription.payment');
-    Route::get('payments', [SubscriptionController::class, 'userSubscriptions'])->name('user.payments');
+    Route::post('subscription/payment', [SubscriptionController::class, "processSubscription"])->name('user.subscription.payment');
+    Route::get('invoices', [SubscriptionController::class, 'userInvoices'])->name('user.invoices');
+
+    // print user invoice
+    Route::get('invoice/{id}', [SubscriptionController::class, "printInvoice"])->name('user.invoice');
 });

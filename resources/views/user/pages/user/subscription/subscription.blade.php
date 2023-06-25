@@ -44,7 +44,10 @@
                 <div class="user-subscription d-flex justify-content-between">
                     <div class="form-group">
                         <label class="form-label mb-0">Your Plan:</label>
-                        <h4>Free - june 2023</h4>
+                        <h4>
+                            {{ $userPlan->name }} -
+                            {{ $user->invoices()->first()->date()->toFormattedDateString() }}
+                        </h4>
                     </div>
                     <div class="upgrade-btn">
                         <button class="btn btn-primary update-plan">
@@ -59,16 +62,20 @@
                     <div class="usage-title d-flex justify-content-between">
                         <h5 class="text-black">Content usage</h5>
                         <h5 class="usage">
-                            <strong>8 words</strong> used of 1500 words
+                            <strong>8 words</strong> used of {{ $userPlan->word_limit }} words
                         </h5>
                     </div>
 
                     <div class="usage-progress mt-2">
+                        @php
+                            $wordsUsedPercent = (8 * 100) / $userPlan->word_limit;
+                        @endphp
+
                         <div class="progress rounded">
                             <div class="progress-bar bg-primary progress-bar-striped  progress-bar-animated"
                                 role="progressbar" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"
-                                style="width: {{ (8 * 100) / 1500 }}%">
-                                <span class="sr-only">{{ (8 * 100) / 1500 }}% Complete (success)</span>
+                                style="width: {{ $wordsUsedPercent }}%">
+                                <span class="sr-only">{{ $wordsUsedPercent }}% Complete (success)</span>
                             </div>
                         </div>
                         <div class="values-map mt-2 d-flex">
@@ -89,16 +96,20 @@
                     <div class="usage-title d-flex justify-content-between">
                         <h5 class="text-black">Images usage</h5>
                         <h5 class="usage">
-                            <strong>12 images</strong> used of 500 images
+                            <strong>12 images</strong> used of {{ $userPlan->image_limit }} images
                         </h5>
                     </div>
 
                     <div class="usage-progress mt-2">
+                        @php
+                            $imagesUsedPercent = (12 * 100) / $userPlan->image_limit;
+                        @endphp
+
                         <div class="progress rounded">
                             <div class="progress-bar bg-primary progress-bar-striped  progress-bar-animated"
                                 role="progressbar" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"
-                                style="width: {{ (12 * 100) / 500 }}%">
-                                <span class="sr-only">{{ (12 * 100) / 500 }}% Complete (success)</span>
+                                style="width: {{ $imagesUsedPercent }}%">
+                                <span class="sr-only">{{ $imagesUsedPercent }} % Complete (success)</span>
                             </div>
                         </div>
                         <div class="values-map mt-2 d-flex">
@@ -132,68 +143,64 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="row gutters">
-                    <div class="col-md-10 col-xl-8">
-                        <div class="plans-title">
-                            <h2 class="my-4 text-center text-capitalize">
-                                <i class="fa fa-grav"></i>
-                                Flexible and transparent pricing
-                            </h2>
-                        </div>
-                        <div class="row">
-                            @foreach ($plans as $index => $plan)
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <div class="plan-card plan-one">
-                                        <div class="pricing-header {{ $index == 1 ? 'green' : '' }}">
-                                            <h4 class="plan-title border-bottom"><i class="fa fa-star"></i>
-                                                {{ $plan->name }}</h4>
-                                            <div class="plan-cost">
-                                                {{ $plan->price }}
-                                                <span class="currency text-lg">{{ $plan->currency }}</span>
-                                            </div>
-                                        </div>
-                                        <ul class="plan-features">
-                                            <li class="py-3">
-                                                <i class="fa fa-check-square mr-1"></i>
-                                                Monthly words limit
-                                                <strong class="ml-2">
-                                                    {{ $plan->word_limit }}
-                                                    words
-                                                </strong>
-                                            </li>
-                                            <li class="py-3">
-                                                <i class="fa fa-check-square mr-1"></i>
-                                                Monthly images limit
-                                                <strong class="ml-2">{{ $plan->image_limit }}
-                                                    images
-                                                </strong>
-                                            </li>
-                                            <li class=" py-3text-muted">
-                                                <i class="fa fa-check-square mr-1"></i>
-                                                ACCESS TOOL (ALL)
-                                            </li>
-                                            <li class=" py-3text-muted">
-                                                <i class="fa fa-check-square mr-1"></i>
-                                                24/7 Tech Support
-                                            </li>
-                                            <li class=" py-3text-muted">
-                                                <i class="fa fa-check-square mr-1"></i>
-                                                Cancel Anytime
-                                            </li>
-                                        </ul>
-                                        <div class="plan-footer py-3">
-                                            <a href="#" data-toggle="modal" data-target="#checkout"
-                                                data-plan='{{ $plan }}'
-                                                class="btn btn-{{ $index == 1 ? 'primary' : 'dark' }} mx-3 btn-lg btn-rounded d-block btn-open-checkout">
-                                                <i class="fa fa-shopping-cart mr-1"></i> Select Plan
-                                            </a>
-                                        </div>
+            <div class="card-body plans-container">
+                <div class="plans-title">
+                    <h2 class="my-4 text-center text-capitalize">
+                        <i class="fa fa-grav"></i>
+                        Flexible and transparent pricing
+                    </h2>
+                </div>
+                <div class="row">
+                    @foreach ($plans as $index => $plan)
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="plan-card plan-one">
+                                <div class="pricing-header {{ $index == 1 ? 'green' : '' }}">
+                                    <h4 class="plan-title border-bottom"><i class="fa fa-star"></i>
+                                        {{ $plan->name }}</h4>
+                                    <div class="plan-cost">
+                                        {{ $plan->price }}
+                                        <span class="currency text-lg">{{ $plan->currency }}</span>
                                     </div>
                                 </div>
-                            @endforeach
+                                <ul class="plan-features">
+                                    <li class="py-3">
+                                        <i class="fa fa-check-square mr-1"></i>
+                                        Monthly words limit
+                                        <strong class="ml-2">
+                                            {{ $plan->word_limit }}
+                                            words
+                                        </strong>
+                                    </li>
+                                    <li class="py-3">
+                                        <i class="fa fa-check-square mr-1"></i>
+                                        Monthly images limit
+                                        <strong class="ml-2">{{ $plan->image_limit }}
+                                            images
+                                        </strong>
+                                    </li>
+                                    <li class=" py-3text-muted">
+                                        <i class="fa fa-check-square mr-1"></i>
+                                        ACCESS TOOL (ALL)
+                                    </li>
+                                    <li class=" py-3text-muted">
+                                        <i class="fa fa-check-square mr-1"></i>
+                                        24/7 Tech Support
+                                    </li>
+                                    <li class=" py-3text-muted">
+                                        <i class="fa fa-check-square mr-1"></i>
+                                        Cancel Anytime
+                                    </li>
+                                </ul>
+                                <div class="plan-footer py-3">
+                                    <a href="#" data-toggle="modal" data-target="#checkout"
+                                        data-plan='{{ $plan }}'
+                                        class="btn btn-{{ $index == 1 ? 'primary' : 'dark' }} mx-3 btn-lg btn-rounded d-block btn-open-checkout">
+                                        <i class="fa fa-shopping-cart mr-1"></i> Select Plan
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -353,7 +360,7 @@
         }
 
         .plan-one .plan-features li {
-            padding: 10px 15px 10px 40px;
+            padding: 10px 15px 10px 22px;
             margin: 5px 0;
             overflow: hidden;
             white-space: nowrap;
@@ -383,6 +390,16 @@
                 display: block;
                 float: none;
                 margin-bottom: 20px;
+            }
+        }
+
+        @media (min-width:1400px) {
+            .plans-container {
+                width: calc(100% - 25%)
+            }
+
+            .plan-one .plan-features li {
+                padding-left: 40px
             }
         }
 

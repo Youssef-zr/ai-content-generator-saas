@@ -27,14 +27,6 @@
                        <i class="fa fa-user-o"></i> Profile
                    </a>
                    <div class="dropdown-divider"></div>
-                   <a href="{{ route('user.subscription') }}" class="dropdown-item">
-                       <i class="fa fa-pencil-square-o"></i> Subscription
-                   </a>
-                   <div class="dropdown-divider"></div>
-                   <a href="{{ route('user.payments') }}" class="dropdown-item">
-                       <i class="fa fa-credit-card-alt"></i> Payments
-                   </a>
-                   <div class="dropdown-divider"></div>
                    <a href="{{ route('user.show_settings') }}" class="dropdown-item">
                        <i class="fa fa-cogs"></i> Settings
                    </a>

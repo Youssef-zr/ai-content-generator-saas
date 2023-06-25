@@ -6,14 +6,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-0"> <i class="fa fa-shopping-cart"></i> Subscriptions</h1>
+                    <h1 class="m-0"> <i class="fa fa-shopping-cart"></i> Subscription</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('user.show_profile') }}"><i class="fa fa-th-list"></i>
-                                Subscriptions
-                            </a>
+                            <i class="fa fa-dollar"></i>
+                            Payments
                         </li>
                         <li class="breadcrumb-item active"><i class="fa fa-eye"></i> show</li>
                     </ol>
@@ -25,12 +24,11 @@
 
 <!-- content -->
 @section('content')
-
     <!-- user subscriptinos -->
     <div class="card card-outline card-primary">
         <div class="card-header">
             <div class="card-title">
-                <h3 class="mb-0"><i class="fa fa-shopping-cart mr-1"></i> Your Subscriptions</h3>
+                <h3 class="mb-0"><i class="fa fa-th-list mr-1"></i> Your Payments</h3>
             </div>
         </div>
 
@@ -38,33 +36,32 @@
             <table class="table table-striped table-hover w-100 text-capitalize text-center w-100">
                 <thead>
                     <tr>
-                        <th>Plan Name</th>
-                        <th>Price</th>
-                        <th>Billing Interval</th>
-                        <th>Trial Start At</th>
-                        <th>Trial Ends At</th>
+                        <th>#</th>
+                        <th>paid at</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>download</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($subscriptions as $subscription)
+                    @foreach ($invoices as $index => $invoice)
                         <tr>
-                            <td>{{ $subscription->plan->name }}</td>
-                            <td>{{ $subscription->plan->price."".$subscription->plan->currency }}</td>
-                            <td>{{ plans_belling_interval()[$subscription->plan->billing_interval] }}</td>
-                            <td>{{ $subscription->created_at->format('Y-m-d H:i') }}</td>
-                            <td>{{ date("Y-m-d H:i",$subscription->asStripeSubscription()->current_period_end) }}</td>
+                            <td>{{ count($invoices) - $index }}</td>
+                            <td>{{ $invoice->date()->toFormattedDateString() }}</td>
+                            <td>{{ $invoice->total() }}</td>
+                            <td>{{ $invoice->status }}</td>
+                            <td><a href="{{ route('user.invoice', $invoice->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-download"></i> Download</a></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
-
 @endsection
 
 @push('javascript')
     <script>
-        $(()=>{
+        $(() => {
             let datatable = window.dt_table;
             setTimeout(() => {
                 datatable.buttons('.buttons-select-all,.buttons-select-none,.delete-all').remove();
@@ -72,4 +69,3 @@
         })
     </script>
 @endpush
-

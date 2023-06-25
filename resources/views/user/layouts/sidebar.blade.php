@@ -99,9 +99,11 @@
                         </ul>
                     </li>
                 @endforeach
-                <!-- dashboard -->
+
+                <!-- subscription -->
                 <li class="nav-header">Subscription</li>
-                <!-- library -->
+
+                <!-- subscription overview -->
                 <li class="nav-item">
                     <a href="{{ route('user.subscription') }}"
                         class="nav-link  {{ setActiveFront('/user/subscription', 'active') }}">
@@ -111,6 +113,18 @@
                         </p>
                     </a>
                 </li>
+
+                <!-- user invoices -->
+                <li class="nav-item">
+                    <a href="{{ route('user.invoices') }}"
+                        class="nav-link  {{ setActiveFront('/user/invoices', 'active') }}">
+                        <i class="nav-icon fa fa-files-o"></i>
+                        <p>
+                            Invoices
+                        </p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
